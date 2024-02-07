@@ -91,14 +91,14 @@ padding-top: 15px;
     width: 100%;
     height: 100%;
     background-color: rgba(240, 240, 240, 0);
-  h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 750; color: rgb(25, 76, 138);; font-size: 55px; font-family: inherit;}
-  h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: gray; font-size: 25px; font-family: inherit;}
-  h4 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: black; font-size: 17px; font-family: inherit;}
-
 `
 
 const ProjectDisplayBox = styled(motion.div)`
 width: 600px;
 height: 550px;
 background-color:  rgba(240, 240, 240, 0);
+  h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 750; color: rgb(25, 76, 138);; font-size: 55px; font-family: inherit;}
+  h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: gray; font-size: 25px; font-family: inherit;}
+  h4 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: black; font-size: 17px; font-family: inherit;}
+
 `

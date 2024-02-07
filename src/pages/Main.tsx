@@ -36,6 +36,7 @@ justify-content: center;
 background-color: rgba(111, 195, 226, 0);
 width: 1200px;
 height: 800px;
+margin-right: 10vw;
 `
 
 const Container = styled.div`
