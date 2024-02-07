@@ -7,11 +7,15 @@ import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
 import MainTitle from '../components/MainTitle';
 import ButtonBox from '../components/ButtonBox';
+import SkillList from '../components/SkillList';
 
 function Main() {
 
     return (<Container>
         <MainTitle></MainTitle>
+        <AnimatePresence>
+        <SkillList key = 'Skill'></SkillList>
+        </AnimatePresence>
         <AnimatePresence>
             <ProjectContainer>
                     <ButtonBox />
@@ -29,7 +33,7 @@ display: flex;
 align-items: center;
 flex-direction: row;
 justify-content: center;
-background-color: rgba(111, 195, 226. 0);
+background-color: rgba(111, 195, 226, 0);
 width: 1200px;
 height: 800px;
 `

@@ -78,6 +78,8 @@ background-color: rgba(255, 255, 255, 0);
   min-height: 400px;
   background-image: ${({ image }) => `url(${image})`};
   margin-top: 10px;
+  border: 5px solid black;
+  border-radius: 5px;
 `
 
 const ProjectBox = styled(motion.div)`
