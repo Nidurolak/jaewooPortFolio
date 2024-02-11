@@ -21,13 +21,13 @@ function SkillList () {
         <h2>Skills</h2>
         <SkillContainer>
         <SkillIcon image={씨샾}></SkillIcon>
+        <SkillIcon image={react}></SkillIcon>
         <SkillIcon image={TS}></SkillIcon>
         <SkillIcon image={fm}></SkillIcon>
         <SkillIcon image={js}></SkillIcon>
         <SkillIcon image={RC}></SkillIcon>
         <SkillIcon image={RQ}></SkillIcon>
         <SkillIcon image={sc}></SkillIcon>
-        <SkillIcon image={react}></SkillIcon>
         </SkillContainer>
 
     </Container>)
@@ -46,6 +46,10 @@ background-color: rgba(255, 255, 255, 1);
   height: 130px;
   border: 2px solid black;
   border-radius: 9px;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 const SkillContainer = styled(motion.div)`

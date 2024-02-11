@@ -22,6 +22,24 @@ function ProjectDisplay(value: ProjectTemplet) {
         exit: {y: 0, opacity: 0, transition: { duration: 1 }}
       }
 
+      useEffect(()=>{
+        const interval = setInterval(() => {
+            switch (ProjectExplainState) {
+                case 'Navis': setProjectExplainState("재우's AI다운로더")
+                    break;
+                case "재우's AI다운로더": setProjectExplainState('AJGAG')
+                    break;
+                case 'AJGAG': setProjectExplainState('골디락스존')
+                    break;
+                case '골디락스존': setProjectExplainState('Navis')
+                    break;
+                default:
+                    break;
+            }
+        }, 10000);
+        return ()=> clearInterval(interval);
+      }, [ProjectExplainState]);
+
     switch (ProjectExplainState) {
         case 'Navis':
             componentToRender = <ProjectBox variants={ProjectVariant} initial='init' animate='visible' exit='exit' key='EXPKey0'>
