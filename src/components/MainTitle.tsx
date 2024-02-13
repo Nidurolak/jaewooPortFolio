@@ -27,10 +27,17 @@ display: flex;
 align-items: flex-start;
 justify-content: flex-start;
 flex-direction: column;
-width: 800px;
+width: 100%;
+max-width: 800px;
 height: 100%;
 padding-top: 150px;
 padding-left: 90px;
+  @media (max-width: 500px) {
+max-width: 500px; /* 화면이 1200px 이하일 때: 한 줄에 4개 */
+  }
+  @media (max-width: 400px) {
+max-width: 400px; /* 화면이 800px 이하일 때: 한 줄에 2개 */
+  }
 `
 
 const MainTitleContainer = styled.div`

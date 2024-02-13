@@ -8,36 +8,25 @@ import ProjectDisplay from '../components/ProjectDisplay';
 import MainTitle from '../components/MainTitle';
 import ButtonBox from '../components/ButtonBox';
 import SkillList from '../components/SkillList';
+import AboutMeList from '../components/AboutMeList';
+import ProjectList from '../components/ProjectList';
 
 function Main() {
 
-    return (<Container>
-        <MainTitle></MainTitle>
+    return (
+    <Container>
+        <MainTitle/>
         <AnimatePresence>
-        <SkillList key = 'Skill'></SkillList>
-        </AnimatePresence>
-        <AnimatePresence>
-            <ProjectContainer>
-                    <ButtonBox />
-                    <ProjectDisplay key = 'ProjectDisList'/>
-            </ProjectContainer>
-        </AnimatePresence>
+            <AboutMeList/>
+            <SkillList key = 'Skill'/>
+            </AnimatePresence>
+            <ProjectList/>
     </Container>)
 }
 
 export default Main;
 
 
-const ProjectContainer = styled.div`
-display: flex;
-align-items: center;
-flex-direction: row;
-justify-content: center;
-background-color: rgba(111, 195, 226, 0);
-width: 1200px;
-height: 800px;
-margin-right: 10vw;
-`
 
 const Container = styled.div`
 padding-top: 90px;
@@ -47,6 +36,7 @@ padding-top: 90px;
     justify-content: flex-start;
     background-color: rgba(240, 240, 240, 1);;
     width: 100vw;
-    height: 2000px;
+    height: fit-content;
+    padding-bottom: 150px;
 `
 

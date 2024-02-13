@@ -37,6 +37,6 @@ justify-content: center;
   &:active {
     filter: brightness(130%); /* 클릭 시 밝기 감소 효과 */
   }
-  h1 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; color: white; font-size: 21px; font-family: inherit;}
+  h1 {word-spacing: 1px; word-break:keep-all; color: white; font-size: 21px; font-family: inherit;}
 
 `

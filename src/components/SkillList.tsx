@@ -19,6 +19,7 @@ import sc from '../assets/sc.jpg';
 function SkillList () {
     return(<Container> 
         <h2>Skills</h2>
+        <Line/>
         <SkillContainer>
         <SkillIcon image={씨샾}></SkillIcon>
         <SkillIcon image={react}></SkillIcon>
@@ -35,6 +36,12 @@ function SkillList () {
 
 export default SkillList;
 
+const Line = styled.div`
+  width: 25vw;
+  height: 5px;
+  background-color: rgba(30, 30, 30, 0.9);
+  margin-bottom: 15px;
+`
 const SkillIcon = styled(motion.div)<{ image: any }>`
 background-color: rgba(255, 255, 255, 1);
   background-repeat: no-repeat;
@@ -61,6 +68,20 @@ justify-content: center;
 align-items: center;
 width: 100%;
 max-width: 50vw;
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr); /* 화면이 1200px 이하일 때: 한 줄에 4개 */
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(4, 1fr); /* 화면이 800px 이하일 때: 한 줄에 2개 */
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(3, 1fr); /* 화면이 800px 이하일 때: 한 줄에 2개 */
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr; /* 화면이 400px 이하일 때: 한 줄에 1개 */
+  }
 `
 
 const Container = styled(motion.div)`
@@ -70,10 +91,12 @@ flex-direction: column;
 justify-content: flex-start;
 padding-top: 25px;
 width: 1200px;
-height: 400px;
+max-height: fit-content;
+gap: 25px;
+margin-bottom: 150px;
 
-  h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
-  h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: black; font-size: 25px; font-family: inherit;}
-  h4 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: gray; font-size: 27px; font-family: inherit;}
+  h2 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
+  h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: black; font-size: 25px; font-family: inherit;}
+  h4 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: gray; font-size: 27px; font-family: inherit;}
 
 `
