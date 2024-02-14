@@ -10,8 +10,10 @@ import HeadImage from '../assets/KakaoTalk_20240207_205532036.jpg'
 function ContactList () {
     
     return(
-        <>
-        </>
+        <Container>
+          <h2>Contact</h2>
+          <Line/>
+        </Container>
     )
 }
 
@@ -28,11 +30,13 @@ const Line = styled.div`
 const Container = styled(motion.div)`
 display: flex;
 align-items: center;
+background-color: aliceblue;
 flex-direction: column;
 justify-content: flex-start;
 padding-top: 25px;
 width: 1200px;
-max-height: fit-content;
+height: 100%;
+max-height: 100%;
 gap: 25px;
 margin-bottom: 150px;
 

@@ -10,6 +10,7 @@ import ButtonBox from '../components/ButtonBox';
 import SkillList from '../components/SkillList';
 import AboutMeList from '../components/AboutMeList';
 import ProjectList from '../components/ProjectList';
+import ContactList from '../components/ContactList';
 
 function Main() {
 
@@ -21,6 +22,7 @@ function Main() {
             <SkillList key = 'Skill'/>
             </AnimatePresence>
             <ProjectList/>
+            <ContactList/>
     </Container>)
 }
 

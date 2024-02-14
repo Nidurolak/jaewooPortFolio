@@ -54,7 +54,8 @@ flex-direction: column;
 justify-content: flex-start;
 width: 70vw;
 max-width: 1000px;
-max-height: fit-content;
+height: 100%;
+min-height: 700px;
 gap: 25px;
 margin-bottom: 50px;
 
