@@ -1,8 +1,7 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, ChangeEvent, useEffect,useRef } from 'react';
 import { styled } from 'styled-components';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import { WheelBool, ExpWheelBool, CurrentAIName, AIMakerExplainModalBool } from '../store/atom';
 import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
 import MainTitle from '../components/MainTitle';
@@ -11,6 +10,7 @@ import SkillList from '../components/SkillList';
 import AboutMeList from '../components/AboutMeList';
 import ProjectList from '../components/ProjectList';
 import ContactList from '../components/ContactList';
+import { Element, scroller } from 'react-scroll';
 
 function Main() {
 
@@ -18,11 +18,14 @@ function Main() {
     <Container>
         <MainTitle/>
         <AnimatePresence>
-            <AboutMeList/>
-            <SkillList key = 'Skill'/>
+            <Element name = "AboutMe"><AboutMeList/></Element>
+            <Element name = "Skill"><SkillList key = 'Skill'/></Element>
+            
             </AnimatePresence>
-            <ProjectList/>
-            <ContactList/>
+            <Element name = "Project"><ProjectList/></Element>
+            <Element name = "Contact"><ContactList/></Element>
+            
+            
     </Container>)
 }
 
@@ -40,5 +43,8 @@ padding-top: 90px;
     width: 100vw;
     height: fit-content;
     padding-bottom: 150px;
+    @media(max-width: 800px){
+        padding-bottom: 50px;
+    }
 `
 

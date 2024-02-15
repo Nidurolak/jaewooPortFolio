@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { styled } from 'styled-components';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import { WheelBool, ExpWheelBool, CurrentAIName, AIMakerExplainModalBool } from '../store/atom';
 import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
 import HeadImage from '../assets/KakaoTalk_20240207_205532036.jpg'
@@ -11,7 +10,7 @@ import 전화 from '../assets/전화.png'
 import git from '../assets/git.png'
 import 티스토리 from '../assets/티스토리.png'
 
-function ContactList () {
+function ContactList (value: any) {
     
     return(
         <Container>
@@ -79,6 +78,8 @@ justify-content: flex-start;
 gap: 25px;
 width: 500px;
 max-width: 500px;
+border: 3px solid rgba(30, 30, 30, 0.9);
+border-radius: 15px;
 height: 300px;
 max-height: 300px;
 `

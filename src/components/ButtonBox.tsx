@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { styled } from 'styled-components';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import { WheelBool, ExpWheelBool, CurrentAIName, AIMakerExplainModalBool } from '../store/atom';
 import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
 import HeadImage from '../assets/KakaoTalk_20240207_205532036.jpg'
