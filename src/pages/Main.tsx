@@ -11,11 +11,13 @@ import AboutMeList from '../components/AboutMeList';
 import ProjectList from '../components/ProjectList';
 import ContactList from '../components/ContactList';
 import { Element, scroller } from 'react-scroll';
+import SkillListTooltip from '../components/SkillListTooltip';
 
 function Main() {
 
     return (
     <Container>
+        <SkillListTooltip></SkillListTooltip>
         <MainTitle/>
         <AnimatePresence>
             <Element name = "AboutMe"><AboutMeList/></Element>
