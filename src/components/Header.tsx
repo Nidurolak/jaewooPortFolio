@@ -11,16 +11,16 @@ import { Link, scroller } from 'react-scroll';
 interface LeftDivProps {
   scrollToComponent: (componentId: string) => void;
 }
-function Header ({ scrollToComponent }: LeftDivProps) {
-    return(<HeaderCotainer>
-        <h3>한 번 해보는 개발자, 김재우</h3>
-        <ScrollBox>
-        <h5 onClick={()=>scrollToComponent("AboutMe")}>About Me</h5>
-        <h5 onClick={()=>scrollToComponent("Skill")}>Skill</h5>
-        <h5 onClick={()=>scrollToComponent("Project")}>Project</h5>
-        <h5 onClick={()=>scrollToComponent("Contact")}>MoreInfo</h5>
-        </ScrollBox>
-    </HeaderCotainer>)
+function Header({ scrollToComponent }: LeftDivProps) {
+  return (<HeaderCotainer>
+    <h3>한 번 해보는 개발자, 김재우</h3>
+    <ScrollBox>
+      <h5 onClick={() => scrollToComponent("AboutMe")}>About Me</h5>
+      <h5 onClick={() => scrollToComponent("Skill")}>Skill</h5>
+      <h5 onClick={() => scrollToComponent("Project")}>Project</h5>
+      <h5 onClick={() => scrollToComponent("Contact")}>MoreInfo</h5>
+    </ScrollBox>
+  </HeaderCotainer>)
 }
 
 export default Header;

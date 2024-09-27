@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect,useRef } from 'react';
+import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
@@ -16,19 +16,18 @@ import SkillListTooltip from '../components/SkillListTooltip';
 function Main() {
 
     return (
-    <Container>
-        <SkillListTooltip></SkillListTooltip>
-        <MainTitle/>
-        <AnimatePresence>
-            <Element name = "AboutMe"><AboutMeList/></Element>
-            <Element name = "Skill"><SkillList key = 'Skill'/></Element>
-            
+        <Container>
+            <MainTitle />
+            <AnimatePresence>
+                <Element name="AboutMe"><AboutMeList /></Element>
+                <Element name="Skill"><SkillList key='Skill' /></Element>
+
             </AnimatePresence>
-            <Element name = "Project"><ProjectList/></Element>
-            <Element name = "Contact"><ContactList/></Element>
-            
-            
-    </Container>)
+            <Element name="Project"><ProjectList /></Element>
+            <Element name="Contact"><ContactList /></Element>
+
+
+        </Container>)
 }
 
 export default Main;
