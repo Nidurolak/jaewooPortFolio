@@ -19,13 +19,40 @@ import SkillListTooltip from './SkillListTooltip';
 function SkillList(value: any) {
 
   const [checkState, setCheckState] = useState(false)
-  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0, skills: "", experts: "" });
+  const containerRef = useRef<HTMLDivElement>(null); // 부모 컨테이너의 ref
 
   const handleMouseEnter = (content: string, event: React.MouseEvent) => {
+
     const buttonRect = event.currentTarget.getBoundingClientRect();
-    const centerX = buttonRect.left + buttonRect.width / 2;
-    const centerY = buttonRect.top + buttonRect.height / 2;
-    setModalPosition({ top: centerY + 400, left: centerX + 80 })
+
+
+    const centerX = buttonRect.left - 220;
+    const containerRect = containerRef.current?.getBoundingClientRect();
+    const relativeLeft = buttonRect.right - containerRect!.left + 10; // 오른쪽에 약간의 여백 추가
+
+    const relativeTop = buttonRect.top - containerRect!.top - 5;
+
+    //const centerY = (buttonRect.bottom + buttonRect.top) / 2;
+
+
+    //const centerX = buttonRect.left + buttonRect.width;
+    const centerY = buttonRect.y;
+
+
+    const text = { skills: "", experts: "" }
+    switch (content) {
+      case "씨샾": text.skills = "C# / Basic"; text.experts = "유니티를 사용한 개발에 사용한 적이 있습니다."; break;
+      case "react": text.skills = "React / Familiar"; text.experts = "핵심적인 웹 기능 개발에 활용한 적이 있습니다."; break;
+      case "TS": text.skills = "TypeScript / Familiar"; text.experts = "개인 프로젝트 개발에 활용한 적이 있습니다."; break;
+      case "fm": text.skills = "Framer Motion / Basic"; text.experts = "개인 프로젝트 개발에 활용한 적이 있습니다."; break;
+      case "js": text.skills = "JavaScript / Familiar"; text.experts = "Familiar"; break;
+      case "RC": text.skills = "React-Recoil / Familiar"; text.experts = `여러 컴포넌트에 활용되는 전역 변수 관리에 사용했습니다. \n 개인 / 팀 작업에 고루 활용하였습니다.`; break;
+      case "RQ": text.skills = "React-Query / Familiar"; text.experts = "개인 / 팀 작업에 고루 활용하였습니다."; break;
+      case "sc": text.skills = "Styled-Components / Familiar"; text.experts = "개인 / 팀 작업에 고루 활용하였습니다."; break;
+      default: break;
+    }
+    setModalPosition({ top: relativeTop, left: relativeLeft, skills: text.skills, experts: text.experts })
     setCheckState(true);
     const rect = event.currentTarget.getBoundingClientRect();
     console.log("Element Coordinates: ", rect);
@@ -38,33 +65,13 @@ function SkillList(value: any) {
     setCheckState(false)
   }
 
-  /*
-  
-  const handleMouseEnter = (content: string, event: React.MouseEvent) => {
-    const buttonRect = event.currentTarget.getBoundingClientRect();
-    const centerX = buttonRect.left + buttonRect.width / 2;
-    const centerY = buttonRect.top + buttonRect.height / 2;
-    setModalPosition({ top: centerY + 20, left: centerX - 125 })
-    //console.log(tooltipUp)
-    switch (content) {
-      case '윈드밀 반응 복귀': toolTipContents.current = '주인의 윈드밀 장전에 반응하여 모든 행동을 정지, 주인 위치로 복귀합니다. 빠른 탑승이 가능해 맵 이동 시 끼어있는 펫을 꺼낼 때에도 유용합니다.'; break;
-      case '자동 원거리 견제': toolTipContents.current = '펫, 주인을 노리는 원거리 공격에 반응하는 견제 패턴입니다. 즉시 모든 행동을 중지, 근접 공격으로 빠르게 견제합니다. 거리에 따라 실패할 수 있습니다.'; break;
-      case '자동 파볼트 견제': toolTipContents.current = '펫, 주인을 노리는 원거리 공격에 반응하는 견제 패턴입니다. 준비된 파볼트 공격으로 빠르게 견제합니다. 거리에 따라 실패할 수 있습니다.'; break;
-      case '자동 신속 발동': toolTipContents.current = '전투 중 신속 게이지가 가득 차면 가능한 즉시 신속의 날개를 발동시킵니다. 특성을 자주 까먹어도 이제 펫이 챙겨줍니다.'; break;
-    }
-    //setTimeout(() => {settooltipUP(true)}, 500)
-    settooltipUP(true)
-  };
-  const handleMouseLeave = (content: string, event: React.MouseEvent) => {
-    settooltipUP(false)
-  }
- */
-
-  return (<Container>
+  return (<Container ref={containerRef}>
     <h2>Skills</h2>
     <Line />
+
     <SkillContainer>
-      {checkState && <SkillListTooltip top={modalPosition.top} left={modalPosition.left}></SkillListTooltip>}
+      {checkState && <SkillListTooltip top={modalPosition.top} left={modalPosition.left} skills={modalPosition.skills} experts={modalPosition.experts}></SkillListTooltip>}
+
       <SkillIcon onMouseEnter={(e) => handleMouseEnter("씨샾", e)} onMouseLeave={(e) => handleMouseLeave()} image={씨샾}> </SkillIcon>
       <SkillIcon onMouseEnter={(e) => handleMouseEnter("react", e)} onMouseLeave={(e) => handleMouseLeave()} image={react}></SkillIcon>
       <SkillIcon onMouseEnter={(e) => handleMouseEnter("TS", e)} onMouseLeave={(e) => handleMouseLeave()} image={TS}></SkillIcon>
@@ -79,18 +86,6 @@ function SkillList(value: any) {
 }
 
 export default SkillList;
-
-const Tooltip = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 140%; /* Adjust to position it next to the icon */
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  white-space: nowrap;
-`;
 
 
 const Line = styled.div`
@@ -121,13 +116,14 @@ const SkillContainer = styled(motion.div)`
 display: grid;
 grid-gap: 20px;
 align-items: center;
-  grid-template-columns: repeat(6, 2fr);
+  grid-template-columns: repeat(4, 1fr);
 justify-content: center;
 align-items: center;
 width: 100%;
-max-width: 50vw;
+max-width: 30vw;
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr); /* 화면이 1200px 이하일 때: 한 줄에 4개 */
+    grid-template-columns: repeat(4, 1fr); /* 화면이 1200px 이하일 때: 한 줄에 4개 */
+max-width: 50vw;
   }
   @media (max-width: 1000px) {
     grid-template-columns: repeat(4, 1fr); /* 화면이 800px 이하일 때: 한 줄에 2개 */
@@ -147,6 +143,7 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: flex-start;
+position: relative;
 width: 1200px;
 max-height: fit-content;
 gap: 25px;
@@ -154,6 +151,5 @@ margin-bottom: 150px;
 
   h2 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
   h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: black; font-size: 25px; font-family: inherit;}
-  h4 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: gray; font-size: 27px; font-family: inherit;}
 
 `
