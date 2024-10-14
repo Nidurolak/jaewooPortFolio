@@ -28,7 +28,9 @@ function ProjectDisplay(value: ProjectTemplet) {
             switch (ProjectExplainState) {
                 case 'Navis': setProjectExplainState("재우's AI다운로더")
                     break;
-                case "재우's AI다운로더": setProjectExplainState('AJGAG')
+                case "재우's AI 다운로더": setProjectExplainState('AJGAG')
+                    break;
+                case "재우's AI 메이커": setProjectExplainState('AJGAG')
                     break;
                 case 'AJGAG': setProjectExplainState('골디락스존')
                     break;
@@ -54,7 +56,7 @@ function ProjectDisplay(value: ProjectTemplet) {
                 </DisPlayIMG>
             </ProjectBox>;
             break;
-        case "재우's AI다운로더":
+        case "재우's AI 다운로더":
             componentToRender = <ProjectBox variants={ProjectVariant} initial='init' animate='visible' exit='exit' key='EXPKey1'>
                 <h2>{ProjectExplainState}</h2>
                 <DisPlayIMG image={재우} onMouseEnter={() => setExplainOn(true)} onMouseLeave={() => setExplainOn(false)}>
@@ -107,7 +109,7 @@ const Line = styled.div`
 const InfoDisplay = styled.div`
 width: 100%;
 height: 100%;
-max-height: 380px;
+max-height: 430px;
   position: absolute;
   top:0;
   left: 0;
@@ -128,7 +130,7 @@ background-color: rgba(255, 255, 255, 0);
   color: rgba(255, 255, 255, 0);
   width: 100%;
   height: 100%;
-  max-height: 380px;
+  max-height: 430px;
   background-image: ${({ image }) => `url(${image})`};
   margin-top: 10px;
   border: 5px solid black;
