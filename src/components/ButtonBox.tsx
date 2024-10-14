@@ -8,13 +8,14 @@ import HeadImage from '../assets/KakaoTalk_20240207_205532036.jpg'
 
 
 function ButtonBox() {
-    return (
-        <ProjectButtonBox>
-            <ProjectButton name="Navis"></ProjectButton>
-            <ProjectButton name="재우's AI다운로더"></ProjectButton>
-            <ProjectButton name="AJGAG"></ProjectButton>
-            <ProjectButton name="골디락스존"></ProjectButton>
-        </ProjectButtonBox>)
+  return (
+    <ProjectButtonBox>
+      <ProjectButton name="Navis"></ProjectButton>
+      <ProjectButton name="재우's AI 다운로더"></ProjectButton>
+      <ProjectButton name="재우's AI 메이커"></ProjectButton>
+      <ProjectButton name="AJGAG"></ProjectButton>
+      <ProjectButton name="골디락스존"></ProjectButton>
+    </ProjectButtonBox>)
 }
 
 export default ButtonBox;
@@ -27,7 +28,7 @@ justify-content: flex-end;
 background-color: rgba(0,0,0,0);
 width: 210px;
 height: 550px;
-gap: 20px;
+gap: 7px;
 padding-right: 10px;
   @media (max-width: 1000px) {
     width: 100%;
