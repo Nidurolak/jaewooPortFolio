@@ -42,14 +42,14 @@ function SkillList(value: any) {
 
     const text = { skills: "", experts: "" }
     switch (content) {
-      case "씨샾": text.skills = "C# / Basic"; text.experts = "유니티를 사용한 개발에 사용한 적이 있습니다."; break;
-      case "react": text.skills = "React / Familiar"; text.experts = "핵심적인 웹 기능 개발에 활용한 적이 있습니다."; break;
-      case "TS": text.skills = "TypeScript / Familiar"; text.experts = "개인 프로젝트 개발에 활용한 적이 있습니다."; break;
-      case "fm": text.skills = "Framer Motion / Basic"; text.experts = "개인 프로젝트 개발에 활용한 적이 있습니다."; break;
-      case "js": text.skills = "JavaScript / Familiar"; text.experts = "Familiar"; break;
-      case "RC": text.skills = "React-Recoil / Familiar"; text.experts = `여러 컴포넌트에 활용되는 전역 변수 관리에 사용했습니다. \n 개인 / 팀 작업에 고루 활용하였습니다.`; break;
-      case "RQ": text.skills = "React-Query / Familiar"; text.experts = "개인 / 팀 작업에 고루 활용하였습니다."; break;
-      case "sc": text.skills = "Styled-Components / Familiar"; text.experts = "개인 / 팀 작업에 고루 활용하였습니다."; break;
+      case "씨샾": text.skills = "C# / Basic"; text.experts = `유니티를 사용한 개발에 사용한 적이 있습니다. \n팀 작업에 활용하였습니다.`; break;
+      case "react": text.skills = "React / Familiar"; text.experts = `핵심적인 웹 기능 개발에 활용한 적이 있습니다. \n개인 / 팀 작업에 고루 활용하였습니다.`; break;
+      case "TS": text.skills = "TypeScript / Familiar"; text.experts = `개인 프로젝트 개발에 활용한 적이 있습니다. \n개인 / 팀 작업에 고루 활용하였습니다.`; break;
+      case "fm": text.skills = "Framer Motion / Basic"; text.experts = `개인 프로젝트 개발에 활용한 적이 있습니다. \n개인 작업에 활용하였습니다.`; break;
+      case "js": text.skills = "JavaScript / Familiar"; text.experts = `프론트엔드 웹 개발에 포괄적으로 활용하였습니다.`; break;
+      case "RC": text.skills = "React-Recoil / Familiar"; text.experts = `여러 컴포넌트에 활용되는 전역 변수 관리에 사용했습니다. \n개인 / 팀 작업에 고루 활용하였습니다.`; break;
+      case "RQ": text.skills = "React-Query / Familiar"; text.experts = `API 통신의 원활한 관리에 사용했습니다. \n개인 / 팀 작업에 고루 활용하였습니다.`; break;
+      case "sc": text.skills = "Styled-Components / Familiar"; text.experts = `전체적인 CSS 관리에 사용했습니다. \n개인 / 팀 작업에 고루 활용하였습니다.`; break;
       default: break;
     }
     setModalPosition({ top: relativeTop, left: relativeLeft, skills: text.skills, experts: text.experts })
