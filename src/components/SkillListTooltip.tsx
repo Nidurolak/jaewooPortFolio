@@ -18,7 +18,7 @@ function SkillListTooltip({ top, left, skills, experts }: TooltipProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.4 }}
       style={{ color: "rgba(240, 240, 240, 0.9)" }}
-    >`{skills}`</MotionH3>
+    >{skills}</MotionH3>
     <MotionH4
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
