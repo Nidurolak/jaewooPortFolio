@@ -21,7 +21,8 @@ const Router = () => {
       <Routes>
         <Route element={<Main />} path="/" />
       </Routes>
-      <Header scrollToComponent={scrollToComponent} />
+      {/*<Header scrollToComponent={scrollToComponent} />*/}
+
     </BrowserRouter>
   )
 }
