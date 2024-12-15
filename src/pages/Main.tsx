@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, AnimationControls, motion, MotionStyle, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
@@ -16,19 +16,33 @@ import SkillListTooltip from '../components/SkillListTooltip';
 function Main() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+    const [aniCheck, setAniCheck] = useState(Boolean);
 
-    const handleMouseEnter = (index: number) => {
-        setHoveredIndex(index);
-    };
+    //컨트롤스를 만들어 관리해야겠어
 
-    const handleMouseLeave = () => {
-        setHoveredIndex(null);
-    };
+    const handleMouseEnter = (index: number) => { console.log(index); clickedIndex === null && setHoveredIndex(index); };
 
+    const handleMouseLeave = () => { console.log(hoveredIndex); controls.stop(); setHoveredIndex(null); };
+
+    const controls = useAnimation();
     const handleClick = (index: number | null) => {
+        console.log("발동")
+        console.log(index)
+        controls.stop();
+        if (clickedIndex === index) {
+            controls.start({ top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: "1" })
+        }
+        else if (clickedIndex !== null) {
+            controls.start({ top: positions[index!].clickedTop, left: "1%", width: "150px", height: "100px", opacity: "0" })
+        }
+        else {
+            controls.start({ top: positions[index!].top, left: positions[index!].left, width: "300px", height: "400px", opacity: "1" })
 
-        setClickedIndex(clickedIndex === index ? null : index);
+        }
+        setClickedIndex(hoveredIndex === index ? index : null);
     };
+
+
     const positions = [
         //좌표 찌그러지는 위치 조정
         { top: "5%", left: "30%", clickedTop: "10%", clickedLeft: "10%" },
@@ -41,44 +55,6 @@ function Main() {
         <AnimatePresence mode='wait'>
             <Container onClick={() => handleClick(null)}>
 
-                {/*
-            <MainTitle />
-            <AnimatePresence>
-                <Element name="AboutMe"><AboutMeList /></Element>
-                <Element name="Skill"><SkillList key='Skill' /></Element>
-
-            </AnimatePresence>
-            <Element name="Project"><ProjectList /></Element>
-            <Element name="Contact"><ContactList /></Element>
-                <Card
-                    key={0 + "card"} index={0}
-                    onMouseEnter={() => handleMouseEnter(0)} onMouseLeave={handleMouseLeave}
-                    onClick={(e) => { e.stopPropagation(); handleClick(0); }}
-                    style={{ top: positions[0].top, left: positions[0].left }}
-                    animate={{
-                        top: clickedIndex === 0 ? "0%" // 클릭된 카드의 상단 기준점
-                            : clickedIndex !== null
-                                ? "0%" // 클릭된 상태에서 다른 카드의 상단 기준점
-                                : positions[0].top, // 기본 상단 기준점
-                        left: clickedIndex === 0
-                            ? "0%" // 클릭된 카드의 상단 기준점
-                            : clickedIndex !== null
-                                ? "0%" // 클릭된 상태에서 다른 카드의 상단 기준점
-                                : positions[0].left, // 기본 상단 기준점
-                        width: clickedIndex === 0
-                            ? "100vw" // 클릭된 카드의 가로 크기
-                            : clickedIndex !== null
-                                ? "0px" // 클릭된 상태에서 다른 카드의 가로 크기
-                                : "300px", // 기본 가로 크기
-                        height: clickedIndex === 0
-                            ? "100vh" // 클릭된 카드의 세로 크기
-                            : clickedIndex !== null
-                                ? "0px" // 클릭된 상태에서 다른 카드의 세로 크기
-                                : "400px", // 기본 세로 크기
-                    }}
-                    transition={{ duration: 0.7 }}
-                />*/}
-
                 {Array.from({ length: 4 }).map((_, index) => (
 
                     <Card
@@ -87,14 +63,25 @@ function Main() {
                         selected={clickedIndex}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleClick(index);
-                        }}
                         style={{
                             top: positions[index].top,
                             left: positions[index].left,
                         }}
+                        animate={controls}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleClick(index);
+                        }}
+                        /** */
+                        transition={{ ease: "easeInOut", duration: clickedIndex === index ? 1.7 : clickedIndex !== null ? 1.3 : 0.8 }}
+
+                    >{clickedIndex === index ? null : clickedIndex !== null ? <h3>테스트2</h3> : <h2>테스트</h2>}
+
+                    </Card>
+                ))}
+            </Container></AnimatePresence>)
+}
+/*
                         animate={{
                             top:
                                 clickedIndex === index
@@ -125,16 +112,14 @@ function Main() {
                                     ? 1 // 클릭된 카드의 세로 크기
                                     : clickedIndex !== null
                                         ? 0 // 클릭된 상태에서 다른 카드의 세로 크기
-                                        : 1, // 기본 세로 크기*/
-                        }}
-                        transition={{ ease: "easeInOut", duration: clickedIndex === index ? 1.7 : clickedIndex !== null ? 1.3 : 0.8 }}
-
-                    ><h2>테스트</h2></Card>
-                ))}
-            </Container></AnimatePresence>)
-}
-/*
-
+                                        : 1, // 기본 세로 크기
+                                        scale:
+                                        hoveredIndex === null
+                                            ? 1 // 모든 카드 기본 크기
+                                            : hoveredIndex === index
+                                                ? 1.1 // 마우스가 올려진 카드의 크기
+                                                : 0.9, // 마우스가 올려지지 않은 카드의 크기
+                                }}
  */
 export default Main;
 
@@ -165,6 +150,9 @@ position: absolute;
     width: 300px;
     height: 400px;
     display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     background-color: rgba(30,30,30,1);
     border:  9px solid rgba(255, 255, 255, 0.8);
     border-radius: 10px;

@@ -17,4 +17,5 @@ export const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
     }
     h2 {color: white; font-weight: 250; font-size: 55px; }
+    h3 {color: white; font-weight: 250; font-size: 27px; }
 `;
