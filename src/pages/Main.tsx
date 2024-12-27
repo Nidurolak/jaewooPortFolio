@@ -13,35 +13,99 @@ import ContactList from '../components/ContactList';
 import { Element, scroller } from 'react-scroll';
 import SkillListTooltip from '../components/SkillListTooltip';
 
+function nameText(index: number) {
+
+    switch (index) {
+        case 0: return (""); break;
+        case 1: return (""); break;
+        case 2: return (""); break;
+        case 3: return (""); break;
+    }
+
+}
+
 function Main() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [clickedIndex, setClickedIndex] = useState<number | null>(null);
-    const [aniCheck, setAniCheck] = useState(Boolean);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const controls1 = useAnimation();
+    const controls2 = useAnimation();
+    const controls3 = useAnimation();
+    const controls4 = useAnimation();
+    const controls1_1 = useAnimation();
+    const controls2_1 = useAnimation();
+    const controls3_1 = useAnimation();
+    const controls4_1 = useAnimation();
+    const controls1_2 = useAnimation();
+    const controls2_2 = useAnimation();
+    const controls3_2 = useAnimation();
+    const controls4_2 = useAnimation();
+    //const cardControlsArray = Array.from({ length: 4 }).map(() => controls);
+    const cardControlsArray = [controls1, controls2, controls3, controls4];
+    const cardControlsArray_1 = [controls1_1, controls2_1, controls3_1, controls4_1];
+    const cardControlsArray_2 = [controls1_2, controls2_2, controls3_2, controls4_2];
 
-    //컨트롤스를 만들어 관리해야겠어
+    //컨트롤스를 만들어 관리해야겠어 
 
-    const handleMouseEnter = (index: number) => { console.log(index); clickedIndex === null && setHoveredIndex(index); };
+    const handleMouseEnter = (index: number) => { console.log(index); console.log(clickedIndex); setHoveredIndex(index); };
 
-    const handleMouseLeave = () => { console.log(hoveredIndex); controls.stop(); setHoveredIndex(null); };
-
-    const controls = useAnimation();
+    const handleMouseLeave = (index: number) => {// 해당 카드의 애니메이션만 중지
+        console.log("asd")
+        setHoveredIndex(null);
+    };
+    //const controls = useAnimation();
     const handleClick = (index: number | null) => {
-        console.log("발동")
-        console.log(index)
-        controls.stop();
-        if (clickedIndex === index) {
-            controls.start({ top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: "1" })
+        if (isAnimating == false) {
+            setClickedIndex(hoveredIndex === index ? index : null);
         }
-        else if (clickedIndex !== null) {
-            controls.start({ top: positions[index!].clickedTop, left: "1%", width: "150px", height: "100px", opacity: "0" })
-        }
-        else {
-            controls.start({ top: positions[index!].top, left: positions[index!].left, width: "300px", height: "400px", opacity: "1" })
-
-        }
-        setClickedIndex(hoveredIndex === index ? index : null);
     };
 
+
+    //버튼클릭 여기서 뱃지 삭제 출현도 설정해야해
+    useEffect(() => {
+        isAnimating == false && cardControlsArray.forEach((ctrl, i) => {
+            cardControlsArray[i].stop();
+            cardControlsArray_1[i].stop();
+            //메인으로 선택되었을 때
+            if (clickedIndex === i) {
+                cardControlsArray[i!].start({ borderWidth: "9px", top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: 1 })
+                cardControlsArray_1[i!].start({ transition: { duration: 0.3 }, opacity: 0 })
+                cardControlsArray_2[i!].start({ transition: { duration: 0 }, opacity: 0 })
+            }
+            //사이드로 빠졌을 때
+            else if (clickedIndex !== null) {
+                cardControlsArray[i!].start({ borderWidth: "3px", top: positions[i!].clickedTop, left: "1%", width: "150px", height: "100px", opacity: 1 })
+                cardControlsArray_1[i!].start({ transition: { duration: 0.3 }, opacity: 0 })
+                cardControlsArray_2[i!].start({ transition: { delay: 1.6, duration: 0.3 }, opacity: 1 })
+            }
+            //기본 화면일 때
+            else {
+                cardControlsArray[i!].start({ borderWidth: "9px", top: positions[i!].top, left: positions[i!].left, width: "300px", height: "400px", opacity: 1 })
+                cardControlsArray_1[i!].start({ transition: { delay: 1.2, duration: 0.6 }, opacity: 1 })
+            }
+        })
+    }, [clickedIndex])
+
+    //투명도 조절 useEffect
+    useEffect(() => {
+        if (isAnimating == false) {
+            cardControlsArray.forEach((ctrl, i) => {
+                const a = cardControlsArray[i!]
+                if (clickedIndex === null) {
+                    if (hoveredIndex === null) {
+                        cardControlsArray[i!].start({ transition: { duration: 0.3 }, opacity: 1 })
+                    }
+                    else if (hoveredIndex === i) {
+                        cardControlsArray[i!].start({ transition: { duration: 0.3 }, opacity: 1 })
+                    }
+                    else if (hoveredIndex !== i) {
+                        cardControlsArray[i!].start({ transition: { duration: 0.3 }, opacity: 0.3 })
+                    }
+
+                }
+            })
+        }
+    }, [hoveredIndex])
 
     const positions = [
         //좌표 찌그러지는 위치 조정
@@ -52,76 +116,66 @@ function Main() {
     ];
 
     return (
-        <AnimatePresence mode='wait'>
+        <AnimatePresence >
             <Container onClick={() => handleClick(null)}>
 
-                {Array.from({ length: 4 }).map((_, index) => (
+                <Card key={0 + "card"} index={0} selected={clickedIndex} animate={cardControlsArray[0]}
+                    onMouseEnter={() => handleMouseEnter(0)} onMouseLeave={() => handleMouseLeave(0)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(0); }}
+                    style={{ top: positions[0].top, left: positions[0].left, }}
+                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 0 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
+                    <motion.div animate={cardControlsArray_1[0]}><CardBadge></CardBadge><h3>자기소개</h3><h3>ABOUTME</h3></motion.div>
+                </Card>
 
-                    <Card
-                        key={index + "card"}
-                        index={index}
-                        selected={clickedIndex}
+                <Card key={1 + "card"} index={1} selected={clickedIndex} animate={cardControlsArray[1]}
+                    onMouseEnter={() => handleMouseEnter(1)} onMouseLeave={() => handleMouseLeave(1)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(1); }}
+                    style={{ top: positions[1].top, left: positions[1].left, }}
+                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 1 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
+                    <motion.div animate={cardControlsArray_1[1]}><CardBadge></CardBadge><h3>스킬소개</h3><h3>ABOUTME</h3></motion.div>
+                </Card>
+
+                <Card key={2 + "card"} index={2} selected={clickedIndex} animate={cardControlsArray[2]}
+                    onMouseEnter={() => handleMouseEnter(2)} onMouseLeave={() => handleMouseLeave(2)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(2); }}
+                    style={{ top: positions[2].top, left: positions[2].left, }}
+                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 2 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
+                    <motion.div animate={cardControlsArray_1[2]}><CardBadge></CardBadge><h3>프로젝트</h3><h3>ABOUTME</h3></motion.div>
+                </Card>
+
+                <Card key={3 + "card"} index={3} selected={clickedIndex} animate={cardControlsArray[3]}
+                    onMouseEnter={() => handleMouseEnter(3)} onMouseLeave={() => handleMouseLeave(3)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(3); }}
+                    style={{ top: positions[3].top, left: positions[3].left, }}
+                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 3 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
+
+                    {[null, 3].includes(clickedIndex)
+                        ? <motion.div animate={cardControlsArray_1[3]} onAnimationStart={() => console.log(cardControlsArray_1[3])} onAnimationComplete={() => console.log("완수")}><CardBadge></CardBadge><h3>연락</h3><h3>ABOUTME</h3></motion.div>
+                        : <motion.h3 animate={cardControlsArray_2[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
+                </Card>
+                {/*Array.from({ length: 4 }).map((_, index) => (
+
+                    <Card key={index + "card"} index={index} selected={clickedIndex} isAni={isAnimating}
                         onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={handleMouseLeave}
-                        style={{
-                            top: positions[index].top,
-                            left: positions[index].left,
-                        }}
-                        animate={controls}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleClick(index);
-                        }}
-                        /** */
-                        transition={{ ease: "easeInOut", duration: clickedIndex === index ? 1.7 : clickedIndex !== null ? 1.3 : 0.8 }}
-
-                    >{clickedIndex === index ? null : clickedIndex !== null ? <h3>테스트2</h3> : <h2>테스트</h2>}
-
+                        onMouseLeave={() => handleMouseLeave(index)}
+                        style={{top: positions[index].top, left: positions[index].left,}}
+                        animate={cardControlsArray[index]}
+                        onClick={(e) => {e.stopPropagation(); isAnimating == false && handleClick(index);}}
+                        onAnimationStart={latest => setIsAnimating(true)}
+                        onAnimationComplete={latest => setIsAnimating(false)}
+                        transition={{ ease: "easeInOut", duration: clickedIndex === index ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
+                            {clickedIndex === index ? null : clickedIndex !== null ? <h3>테스트2</h3> : <h2>테스트</h2>}
                     </Card>
-                ))}
+                ))*/}
             </Container></AnimatePresence>)
 }
-/*
-                        animate={{
-                            top:
-                                clickedIndex === index
-                                    ? "10%" // 클릭된 카드의 상단 기준점
-                                    : clickedIndex !== null
-                                        ? positions[index].clickedTop // 클릭된 상태에서 다른 카드의 상단 기준점
-                                        : positions[index].top, // 기본 상단 기준점
-                            left:
-                                clickedIndex === index
-                                    ? "15%" // 클릭된 카드의 상단 기준점
-                                    : clickedIndex !== null
-                                        ? "1%" // 클릭된 상태에서 다른 카드의 상단 기준점
-                                        : positions[index].left, // 기본 상단 기준점
-                            width:
-                                clickedIndex === index
-                                    ? "70vw" // 클릭된 카드의 가로 크기
-                                    : clickedIndex !== null
-                                        ? "150px" // 클릭된 상태에서 다른 카드의 가로 크기
-                                        : "300px", // 기본 가로 크기
-                            height:
-                                clickedIndex === index
-                                    ? "80vh" // 클릭된 카드의 세로 크기
-                                    : clickedIndex !== null
-                                        ? "100px" // 클릭된 상태에서 다른 카드의 세로 크기
-                                        : "400px", // 기본 세로 크기
-                            /*opacity:
-                                clickedIndex === index
-                                    ? 1 // 클릭된 카드의 세로 크기
-                                    : clickedIndex !== null
-                                        ? 0 // 클릭된 상태에서 다른 카드의 세로 크기
-                                        : 1, // 기본 세로 크기
-                                        scale:
-                                        hoveredIndex === null
-                                            ? 1 // 모든 카드 기본 크기
-                                            : hoveredIndex === index
-                                                ? 1.1 // 마우스가 올려진 카드의 크기
-                                                : 0.9, // 마우스가 올려지지 않은 카드의 크기
-                                }}
- */
 export default Main;
+
+const CardBadge = styled.div`
+    width: 150px;
+    height: 150px;
+   background-color: honeydew;
+`
 
 const CardBox = styled.div`
 display: grid;
@@ -151,10 +205,12 @@ position: absolute;
     height: 400px;
     display: flex;
     align-items: center;
+    flex-direction: column;
     text-align: center;
     justify-content: center;
     background-color: rgba(30,30,30,1);
-    border:  9px solid rgba(255, 255, 255, 0.8);
+    border: 9px solid rgba(255, 255, 255, 0.8);
+    /*border: ${({ index, selected }) => (selected === null ? `9px solid rgba(255, 255, 255, 0.8)` : index === selected ? `9px solid rgba(255, 255, 255, 0.8)` : `3px solid rgba(255, 255, 255, 0.8)`)} ;*/
     border-radius: 10px;
 align-items: center;
 z-index: ${({ index, selected }) => (index === selected ? 999 : index)};
