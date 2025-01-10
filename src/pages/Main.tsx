@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
-import { AnimatePresence, AnimationControls, motion, MotionStyle, useAnimation } from 'framer-motion';
+import { AnimatePresence, AnimationControls, delay, motion, MotionStyle, useAnimation } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import ProjectButton from '../components/ProjectButton';
 import ProjectDisplay from '../components/ProjectDisplay';
@@ -81,6 +81,7 @@ function Main() {
             //기본 화면일 때
             else {
                 cardControlsArray[i!].start({ borderWidth: "9px", top: positions[i!].top, left: positions[i!].left, width: "300px", height: "400px", opacity: 1 })
+                //이거를 좀 건드려야할 거 같아
                 cardControlsArray_1[i!].start({ transition: { delay: 1.2, duration: 0.6 }, opacity: 1 })
             }
         })
@@ -124,7 +125,9 @@ function Main() {
                     style={{ top: positions[0].top, left: positions[0].left, }}
                     onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 0 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
-                    <motion.div animate={cardControlsArray_1[0]}><CardBadge></CardBadge><h3>자기소개</h3><h3>ABOUTME</h3></motion.div>
+                    {[null, 0].includes(clickedIndex)
+                        ? <motion.div animate={cardControlsArray_1[0]} onAnimationStart={() => console.log(cardControlsArray_1[0])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 0 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>자기소개</h3><h3>ABOUTME</h3></motion.div>
+                        : <motion.h3 animate={cardControlsArray_2[0]} initial={{ opacity: 0 }}>자기소개</motion.h3>}
                 </Card>
 
                 <Card key={1 + "card"} index={1} selected={clickedIndex} animate={cardControlsArray[1]}
@@ -132,7 +135,9 @@ function Main() {
                     style={{ top: positions[1].top, left: positions[1].left, }}
                     onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 1 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
-                    <motion.div animate={cardControlsArray_1[1]}><CardBadge></CardBadge><h3>스킬소개</h3><h3>ABOUTME</h3></motion.div>
+                    {[null, 1].includes(clickedIndex)
+                        ? <motion.div animate={cardControlsArray_1[1]} onAnimationStart={() => console.log(cardControlsArray_1[1])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 1 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>스킬소개</h3><h3>ABOUTME</h3></motion.div>
+                        : <motion.h3 animate={cardControlsArray_2[1]} initial={{ opacity: 0 }}>스킬소개</motion.h3>}
                 </Card>
 
                 <Card key={2 + "card"} index={2} selected={clickedIndex} animate={cardControlsArray[2]}
@@ -140,7 +145,10 @@ function Main() {
                     style={{ top: positions[2].top, left: positions[2].left, }}
                     onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 2 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
-                    <motion.div animate={cardControlsArray_1[2]}><CardBadge></CardBadge><h3>프로젝트</h3><h3>ABOUTME</h3></motion.div>
+
+                    {[null, 2].includes(clickedIndex)
+                        ? <motion.div animate={cardControlsArray_1[2]} onAnimationStart={() => console.log(cardControlsArray_1[2])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 2 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>프로젝트</h3><h3>ABOUTME</h3></motion.div>
+                        : <motion.h3 animate={cardControlsArray_2[2]} initial={{ opacity: 0 }}>프로젝트</motion.h3>}
                 </Card>
 
                 <Card key={3 + "card"} index={3} selected={clickedIndex} animate={cardControlsArray[3]}
@@ -150,7 +158,7 @@ function Main() {
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 3 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
                     {[null, 3].includes(clickedIndex)
-                        ? <motion.div animate={cardControlsArray_1[3]} onAnimationStart={() => console.log(cardControlsArray_1[3])} onAnimationComplete={() => console.log("완수")}><CardBadge></CardBadge><h3>연락</h3><h3>ABOUTME</h3></motion.div>
+                        ? <motion.div animate={cardControlsArray_1[3]} onAnimationStart={() => console.log(cardControlsArray_1[3])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 3 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>연락</h3><h3>ABOUTME</h3></motion.div>
                         : <motion.h3 animate={cardControlsArray_2[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
                 </Card>
                 {/*Array.from({ length: 4 }).map((_, index) => (
