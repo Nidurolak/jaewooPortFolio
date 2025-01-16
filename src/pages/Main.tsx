@@ -41,10 +41,15 @@ function Main() {
     const controls2_2 = useAnimation();
     const controls3_2 = useAnimation();
     const controls4_2 = useAnimation();
+    const controls1_3 = useAnimation();
+    const controls2_3 = useAnimation();
+    const controls3_3 = useAnimation();
+    const controls4_3 = useAnimation();
     //const cardControlsArray = Array.from({ length: 4 }).map(() => controls);
     const cardControlsArray = [controls1, controls2, controls3, controls4];
     const cardMenuArray = [controls1_1, controls2_1, controls3_1, controls4_1];
     const cardSideArray = [controls1_2, controls2_2, controls3_2, controls4_2];
+    const cardContentArray = [controls1_3, controls2_3, controls3_3, controls4_3];
 
     //컨트롤스를 만들어 관리해야겠어 
 
@@ -64,6 +69,7 @@ function Main() {
 
     //버튼클릭 여기서 뱃지 삭제 출현도 설정해야해
     useEffect(() => {
+        //카드콘텐츠 유스스테이스를 체크하고 바꿔야겠어.
         isAnimating == false && cardControlsArray.forEach((ctrl, i) => {
             cardControlsArray[i].stop();
             cardMenuArray[i].stop();
@@ -73,20 +79,28 @@ function Main() {
                 cardControlsArray[i!].start({ borderWidth: "9px", top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: 1 })
                 cardMenuArray[i!].start({ transition: { duration: 0.3 }, opacity: 0 })
                 cardSideArray[i!].start({ transition: { duration: 0 }, opacity: 0 })
+                cardContentArray[i!].start({ transition: { delay: 2, duration: 1 }, opacity: 1 })
+                //setIsContentsOn(false)
             }
             //사이드로 빠졌을 때
             else if (clickedIndex !== null) {
                 cardControlsArray[i!].start({ borderWidth: "3px", top: positions[i!].clickedTop, left: "1%", width: "150px", height: "100px", opacity: 1 })
                 cardMenuArray[i!].start({ transition: { duration: 0.3 }, opacity: 0 })
                 cardSideArray[i!].start({ transition: { delay: 1.6, duration: 0.3 }, opacity: 1 })
+                setIsContentsOn(false)
+                //cardContentArray[i!].start({ transition: { duration: 1 }, opacity: 1 })
             }
             //기본 화면일 때
             else {
                 cardControlsArray[i!].start({ borderWidth: "9px", top: positions[i!].top, left: positions[i!].left, width: "300px", height: "400px", opacity: 1 })
                 //이거를 좀 건드려야할 거 같아
                 cardMenuArray[i!].start({ transition: { delay: 1.2, duration: 0.6 }, opacity: 1 })
+                setIsContentsOn(false)
+                //cardContentArray[i!].start({ transition: { duration: 1 }, opacity: 1 })
             }
         })
+        console.log("선택넘버 " + clickedIndex)
+        console.log()
     }, [clickedIndex])
 
     //투명도 조절 useEffect
@@ -119,7 +133,7 @@ function Main() {
     ];
 
     return (
-        <AnimatePresence >
+        <AnimatePresence mode='wait'>
             <Container onClick={() => handleClick(null)}>
 
                 <Card key={0 + "card"} index={0} selected={clickedIndex} animate={cardControlsArray[0]}
@@ -159,27 +173,17 @@ function Main() {
                     onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 3 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
-                    {[null, 3].includes(clickedIndex)
-                        ? isContentsOn === true
-                            ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/ <motion.div transition={{ delay: 2, duration: 1 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} > <h2>asdasd</h2> </motion.div>
-                            : <motion.div animate={cardMenuArray[3]} onAnimationStart={() => console.log(cardMenuArray[3])} onAnimationComplete={() => { clickedIndex !== null && setIsContentsOn(true) }} initial={{ opacity: clickedIndex === 3 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>연락</h3><h3>ABOUTME</h3></motion.div>
+                    <AnimatePresence mode='wait'>
+                        {[null, 3].includes(clickedIndex)
+                            ? isContentsOn === true
+                                ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/
+                                <motion.div animate={cardContentArray[3]} onAnimationStart={() => console.log("어레이 시작")} onAnimationComplete={() => { /*clickedIndex === null && setIsContentsOn(false); console.log("아ㅣ니니니") */ }}> <h2>asdasd</h2> </motion.div>
+                                :
+                                <motion.div animate={cardMenuArray[3]} onAnimationComplete={() => { clickedIndex !== null && setIsContentsOn(true) }} initial={{ opacity: clickedIndex === null ? 0 : 1 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>ABOUTME</motion.h3></motion.div>
 
-                        : <motion.h3 animate={cardSideArray[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
+                            : <motion.h3 animate={cardSideArray[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
+                    </AnimatePresence>
                 </Card>
-                {/*Array.from({ length: 4 }).map((_, index) => (
-
-                    <Card key={index + "card"} index={index} selected={clickedIndex} isAni={isAnimating}
-                        onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={() => handleMouseLeave(index)}
-                        style={{top: positions[index].top, left: positions[index].left,}}
-                        animate={cardControlsArray[index]}
-                        onClick={(e) => {e.stopPropagation(); isAnimating == false && handleClick(index);}}
-                        onAnimationStart={latest => setIsAnimating(true)}
-                        onAnimationComplete={latest => setIsAnimating(false)}
-                        transition={{ ease: "easeInOut", duration: clickedIndex === index ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
-                            {clickedIndex === index ? null : clickedIndex !== null ? <h3>테스트2</h3> : <h2>테스트</h2>}
-                    </Card>
-                ))*/}
             </Container></AnimatePresence>)
 }
 export default Main;
