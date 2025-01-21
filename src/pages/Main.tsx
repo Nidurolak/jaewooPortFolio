@@ -29,6 +29,7 @@ function Main() {
     const [clickedIndex, setClickedIndex] = useState<number | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [isContentsOn, setIsContentsOn] = useState(false);
+    const lastestContentsNum = useRef<number | null>(null);
     const controls1 = useAnimation();
     const controls2 = useAnimation();
     const controls3 = useAnimation();
@@ -53,10 +54,10 @@ function Main() {
 
     //컨트롤스를 만들어 관리해야겠어 
 
-    const handleMouseEnter = (index: number) => { console.log(index); console.log(clickedIndex); setHoveredIndex(index); };
+    const handleMouseEnter = (index: number) => { /*console.log(index); console.log(clickedIndex);*/ setHoveredIndex(index); };
 
     const handleMouseLeave = (index: number) => {// 해당 카드의 애니메이션만 중지
-        console.log("asd")
+        //console.log("asd")
         setHoveredIndex(null);
     };
     //const controls = useAnimation();
@@ -74,12 +75,13 @@ function Main() {
             cardControlsArray[i].stop();
             cardMenuArray[i].stop();
             cardSideArray[i].stop();
+            cardContentArray[i].stop();
             //메인으로 선택되었을 때
             if (clickedIndex === i) {
                 cardControlsArray[i!].start({ borderWidth: "9px", top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: 1 })
                 cardMenuArray[i!].start({ transition: { duration: 0.3 }, opacity: 0 })
                 cardSideArray[i!].start({ transition: { duration: 0 }, opacity: 0 })
-                cardContentArray[i!].start({ transition: { delay: 2, duration: 1 }, opacity: 1 })
+                //cardContentArray[i!].start({ transition: { delay: 2, duration: 1 }, opacity: 1 })
                 //setIsContentsOn(false)
             }
             //사이드로 빠졌을 때
@@ -123,6 +125,23 @@ function Main() {
             })
         }
     }, [hoveredIndex])
+    /** */
+    useEffect(() => {
+        if (isAnimating == false) {
+            //여기서 유스 콘텐츠 관련 애니메이션 작동
+            console.log("이게게겍" + isContentsOn + clickedIndex + lastestContentsNum.current)
+            if (clickedIndex !== null) {
+                if (clickedIndex === lastestContentsNum.current) {
+                    cardContentArray[clickedIndex].start({ transition: { delay: 2, duration: 1 }, opacity: 1 })
+
+                }
+            }
+            else if (lastestContentsNum.current !== null) {
+                console.log("사이드 발동")
+                cardContentArray[lastestContentsNum.current!].start({ transition: { delay: 2, duration: 1 }, opacity: 0 })
+            }
+        }
+    }, [isContentsOn])
 
     const positions = [
         //좌표 찌그러지는 위치 조정
@@ -133,9 +152,7 @@ function Main() {
     ];
 
     return (
-        <AnimatePresence mode='wait'>
-            <Container onClick={() => handleClick(null)}>
-
+        <Container onClick={() => handleClick(null)}>{/*
                 <Card key={0 + "card"} index={0} selected={clickedIndex} animate={cardControlsArray[0]}
                     onMouseEnter={() => handleMouseEnter(0)} onMouseLeave={() => handleMouseLeave(0)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(0); }}
                     style={{ top: positions[0].top, left: positions[0].left, }}
@@ -155,36 +172,42 @@ function Main() {
                         ? <motion.div animate={cardMenuArray[1]} onAnimationStart={() => console.log(cardMenuArray[1])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 1 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>스킬소개</h3><h3>ABOUTME</h3></motion.div>
                         : <motion.h3 animate={cardSideArray[1]} initial={{ opacity: 0 }}>스킬소개</motion.h3>}
                 </Card>
-
+*/}
+            <AnimatePresence mode='wait'>
                 <Card key={2 + "card"} index={2} selected={clickedIndex} animate={cardControlsArray[2]}
                     onMouseEnter={() => handleMouseEnter(2)} onMouseLeave={() => handleMouseLeave(2)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(2); }}
                     style={{ top: positions[2].top, left: positions[2].left, }}
-                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    onAnimationStart={latest => setIsAnimating(true)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 2 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
                     {[null, 2].includes(clickedIndex)
-                        ? <motion.div animate={cardMenuArray[2]} onAnimationStart={() => console.log(cardMenuArray[2])} onAnimationComplete={() => console.log("완수")} initial={{ opacity: clickedIndex === 2 ? 0 : clickedIndex !== null ? 1 : 0 }}><CardBadge></CardBadge><h3>프로젝트</h3><h3>ABOUTME</h3></motion.div>
+                        ? isContentsOn === true
+                            ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/
+                            <motion.div animate={cardContentArray[2]} onAnimationStart={() => console.log("어레이2 시작")} onAnimationComplete={() => { /*clickedIndex === null && setIsContentsOn(false);*/  console.log("아ㅣ니니니") }}> <motion.h2>asdasd</motion.h2> </motion.div>
+                            :
+                            <motion.div animate={cardMenuArray[2]} onAnimationComplete={() => { console.log(clickedIndex !== null); clickedIndex !== null && setIsContentsOn(true); lastestContentsNum.current = clickedIndex; }} initial={{ opacity: clickedIndex === null ? 0 : clickedIndex === 2 ? 1 : 0 }}><CardBadge></CardBadge><motion.h3>프로젝트</motion.h3><motion.h3>Project</motion.h3></motion.div>
+
                         : <motion.h3 animate={cardSideArray[2]} initial={{ opacity: 0 }}>프로젝트</motion.h3>}
                 </Card>
-
-                <Card key={3 + "card"} index={3} selected={clickedIndex} animate={cardControlsArray[3]}
+            </AnimatePresence >
+            <AnimatePresence mode='wait'>
+                <Card key={"3card"} index={3} selected={clickedIndex} animate={cardControlsArray[3]}
                     onMouseEnter={() => handleMouseEnter(3)} onMouseLeave={() => handleMouseLeave(3)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(3); }}
                     style={{ top: positions[3].top, left: positions[3].left, }}
-                    onAnimationStart={latest => setIsAnimating(true)} onAnimationComplete={latest => setIsAnimating(false)}
+                    onAnimationStart={() => setIsAnimating(true)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 3 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
-                    <AnimatePresence mode='wait'>
-                        {[null, 3].includes(clickedIndex)
-                            ? isContentsOn === true
-                                ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/
-                                <motion.div animate={cardContentArray[3]} onAnimationStart={() => console.log("어레이 시작")} onAnimationComplete={() => { /*clickedIndex === null && setIsContentsOn(false); console.log("아ㅣ니니니") */ }}> <h2>asdasd</h2> </motion.div>
-                                :
-                                <motion.div animate={cardMenuArray[3]} onAnimationComplete={() => { clickedIndex !== null && setIsContentsOn(true) }} initial={{ opacity: clickedIndex === null ? 0 : 1 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>ABOUTME</motion.h3></motion.div>
+                    {[null, 3].includes(clickedIndex)
+                        ? isContentsOn === true
+                            ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/
+                            <motion.div animate={cardContentArray[3]} onAnimationStart={() => console.log("어레이3 시작")} onAnimationComplete={() => setIsAnimating(false)}> <motion.h2>asdasd</motion.h2> </motion.div>
+                            :
+                            <motion.div animate={cardMenuArray[3]} onAnimationComplete={() => { setIsAnimating(false); clickedIndex !== null && setIsContentsOn(true); lastestContentsNum.current = clickedIndex; }} initial={{ opacity: clickedIndex === null ? 0 : clickedIndex === 3 ? 1 : 0 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>ABOUTME</motion.h3></motion.div>
 
-                            : <motion.h3 animate={cardSideArray[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
-                    </AnimatePresence>
+                        : <motion.h3 animate={cardSideArray[3]} initial={{ opacity: 0 }}>연락</motion.h3>}
                 </Card>
-            </Container></AnimatePresence>)
+            </AnimatePresence >
+        </Container >)
 }
 export default Main;
 
@@ -237,7 +260,7 @@ z-index: ${({ index, selected }) => (index === selected ? 999 : index)};
 
 `
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     position: relative;
     width: 100vw;
     height: 100vh;

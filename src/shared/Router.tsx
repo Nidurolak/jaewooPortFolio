@@ -4,6 +4,7 @@ import Main from '../pages/Main';
 import { styled } from 'styled-components';
 import Header from "../components/Header";
 import { scroller } from "react-scroll";
+import Test from "../pages/Test";
 
 const Router = () => {
 
@@ -20,6 +21,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Main />} path="/" />
+        <Route element={<Test />} path="/Test" />
       </Routes>
       {/*<Header scrollToComponent={scrollToComponent} />*/}
 
