@@ -17,6 +17,8 @@ import SkillListTooltip from '../components/SkillListTooltip';
 function Test() {
     const [isInitial, setIsInitial] = useState(true);
     const [isAni, setIsAni] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [clickedIndex, setClickedIndex] = useState<number | null>(null);
     const testVariants: Variants = {
         initialBlue: { opacity: 0, x: 200 },
         initialPink: { opacity: 0, x: -100 },
@@ -39,14 +41,54 @@ function Test() {
     ];
 
 
-    const Clicked = () => {
+    const Clicked = (clicked?: number) => {
         if (isAni == false) {
             setIsInitial(!isInitial)
+            setClickedIndex(clicked ?? null)
         }
     }
+    //버튼 누르면 카드 커지는거 차례
     return (
-        <Container>
-            <Card index={3} selected={1}>
+        <Container onClick={() => Clicked()}>
+            <Card onClick={() => Clicked(0)} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={1} selected={1}>
+                <AnimatePresence mode='wait'>
+                    {isInitial &&
+                        <motion.div key={"with-initial"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>메인</h2></motion.div>}
+                    {!isInitial && clickedIndex !== null && clickedIndex === 0 &&
+                        <motion.div key={"with-initial1"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>콘텐츠</h2></motion.div>
+                    }
+                    {!isInitial && clickedIndex === null &&
+                        <motion.div key={"with-initial2"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>사이드</h2></motion.div>
+                    }
+                </AnimatePresence>
+            </Card>
+            {/** 
+            <Card onClick={() => Clicked(0)} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={1} selected={1}>
+                <button onClick={() => Clicked(0)}>{isInitial ? "스테이트 투르" : "스테이트 폴스"}</button>
+                <AnimatePresence mode='wait'>
+                    {isInitial && clickedIndex === null
+                        ? <motion.div key={"with-initial"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>메인</h2></motion.div>
+                        : <motion.div key={"with-initial1"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>콘텐츠</h2></motion.div>
+                    }
+                </AnimatePresence>
+            </Card>
+            <Card variants={mainVariants} style={{ top: "5%", left: "50%" }} index={2} selected={2}>
+                <button onClick={() => Clicked(1)}>{isInitial ? "스테이트 투르" : "스테이트 폴스"}</button>
+                <AnimatePresence mode='wait'>
+                    {isInitial && clickedIndex === null
+                        ? <motion.div key={"with-initial"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>asd</h2></motion.div>
+                        : <motion.div key={"with-initial1"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                            animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>zzzz</h2></motion.div>
+                    }
+                </AnimatePresence>
+            </Card>
+            <Card index={3} selected={3} style={{ top: "50%", left: "30%" }}>
                 <button onClick={Clicked}>{isInitial ? "스테이트 투르" : "스테이트 폴스"}</button>
                 <AnimatePresence mode='wait'>
                     {isInitial
@@ -56,7 +98,7 @@ function Test() {
                             animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>zzzz</h2></motion.div>
                     }
                 </AnimatePresence>
-            </Card>
+            </Card>*/}
 
         </Container>
     );

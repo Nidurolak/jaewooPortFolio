@@ -54,11 +54,17 @@ function Main() {
 
     //컨트롤스를 만들어 관리해야겠어 
 
-    const handleMouseEnter = (index: number) => { /*console.log(index); console.log(clickedIndex);*/ setHoveredIndex(index); };
+    const handleMouseEnter = (index: number) => {
+        if (isAnimating == false) {
+            setHoveredIndex(index);
+        } /*console.log(index); console.log(clickedIndex);*/
+    };
 
     const handleMouseLeave = (index: number) => {// 해당 카드의 애니메이션만 중지
         //console.log("asd")
-        setHoveredIndex(null);
+        if (isAnimating == false) {
+            setHoveredIndex(null);
+        }
     };
     //const controls = useAnimation();
     const handleClick = (index: number | null) => {
@@ -178,6 +184,7 @@ function Main() {
                     onMouseEnter={() => handleMouseEnter(2)} onMouseLeave={() => handleMouseLeave(2)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(2); }}
                     style={{ top: positions[2].top, left: positions[2].left, }}
                     onAnimationStart={latest => setIsAnimating(true)}
+                    onAnimationComplete={() => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 2 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
                     {[null, 2].includes(clickedIndex)
@@ -195,6 +202,7 @@ function Main() {
                     onMouseEnter={() => handleMouseEnter(3)} onMouseLeave={() => handleMouseLeave(3)} onClick={(e) => { e.stopPropagation(); isAnimating == false && handleClick(3); }}
                     style={{ top: positions[3].top, left: positions[3].left, }}
                     onAnimationStart={() => setIsAnimating(true)}
+                    onAnimationComplete={() => setIsAnimating(false)}
                     transition={{ ease: "easeInOut", delay: 0.4, duration: clickedIndex === 3 ? 1.4 : clickedIndex !== null ? 1.1 : 0.8 }}>
 
                     {[null, 3].includes(clickedIndex)
