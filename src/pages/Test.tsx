@@ -29,6 +29,10 @@ function Test() {
         getSide1: { borderWidth: "3px", top: "25%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getSide2: { borderWidth: "3px", top: "40%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getSide3: { borderWidth: "3px", top: "55%", left: "1%", width: "150px", height: "100px", opacity: 1 },
+        getMain0: { borderWidth: "3px", top: "5%", left: "30%", width: "300px", height: "400px", opacity: 1 },
+        getMain1: { borderWidth: "3px", top: "5%", left: "50%", width: "300px", height: "400px", opacity: 1 },
+        getMain2: { borderWidth: "3px", top: "50%", left: "30%", width: "300px", height: "400px", opacity: 1 },
+        getMain3: { borderWidth: "3px", top: "50%", left: "50%", width: "300px", height: "400px", opacity: 1 },
         //겟main 짤 것
     }
 
@@ -40,31 +44,74 @@ function Test() {
         { top: "50%", left: "50%", clickedTop: "55%", clickedLeft: "10%" },
     ];
 
-    const cardInitial = (clicked?: number) => {
+    const cardAni = (thisNum?: number) => {
 
+        //console.log(thisNum)
+        //클릭이 null, 기본화면이면 
+        if (clickedIndex === null) {
+            switch (thisNum) {
+                case 0: return "getMain0";
+                case 1: return "getMain1";
+                case 2: return "getMain2";
+                case 3: return "getMain3";
+            }
+        }
+        //클릭된 것이면
+        if (thisNum === clickedIndex) {
+            return "getContent";
+        }
+        else {
+            switch (thisNum) {
+                case 0: return "getSide0";
+                case 1: return "getSide1";
+                case 2: return "getSide2";
+                case 3: return "getSide3";
+            }
+        };
+        return "getContent";
     }
 
     const Clicked = (clicked?: number) => {
         if (isAni == false) {
+            let a = clicked ?? 5
             setIsInitial(!isInitial)
             setClickedIndex(clicked ?? null)
         }
+        console.log(clickedIndex)
     }
+    //is이니셜이 문제인데
     //버튼 누르면 카드 커지는거 차례
     return (
         <Container onClick={() => Clicked()}>
             <AnimatePresence mode='wait'>
-                <Card onClick={() => Clicked(0)} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={1} selected={1}>
+                <Card onClick={(e) => { e.stopPropagation(); Clicked(0) }} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={0} selected={0} animate={cardAni(0)} transition={{ duration: 2 }}>
                     <AnimatePresence mode='wait'>
-                        {isInitial &&
-                            <motion.div key={"with-initial"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                        {clickedIndex === null &&
+                            <motion.div key={"with-initial00"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>메인</h2></motion.div>}
-                        {!isInitial && clickedIndex !== null && clickedIndex === 0 &&
-                            <motion.div key={"with-initial1"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                        {clickedIndex === 0 &&
+                            <motion.div key={"with-initial01"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>콘텐츠</h2></motion.div>
                         }
-                        {!isInitial && clickedIndex === null &&
-                            <motion.div key={"with-initial2"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                        {clickedIndex !== null && clickedIndex !== 0 &&
+                            <motion.div key={"with-initial02"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                                animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>사이드</h2></motion.div>
+                        }
+                    </AnimatePresence>
+                </Card>
+            </AnimatePresence>
+            <AnimatePresence mode='wait'>
+                <Card onClick={(e) => { e.stopPropagation(); Clicked(1) }} variants={mainVariants} style={{ top: "5%", left: "50%" }} index={1} selected={1} animate={cardAni(1)} transition={{ duration: 2 }}>
+                    <AnimatePresence mode='wait'>
+                        {clickedIndex === null &&
+                            <motion.div key={"with-initial10"} initial={isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                                animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>메인</h2></motion.div>}
+                        {clickedIndex === 1 &&
+                            <motion.div key={"with-initial11"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
+                                animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>콘텐츠</h2></motion.div>
+                        }
+                        {clickedIndex !== null && clickedIndex !== 1 &&
+                            <motion.div key={"with-initial12"} initial={!isInitial ? { opacity: 0, } : false} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 2 }} exit={{ opacity: 0 }}><h2>사이드</h2></motion.div>
                         }
                     </AnimatePresence>
