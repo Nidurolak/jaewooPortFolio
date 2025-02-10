@@ -17,14 +17,14 @@ function SkillListTooltip({ top, left, skills, experts }: TooltipProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.4 }}
-      style={{ color: "rgba(240, 240, 240, 0.9)" }}
+      style={{ color: "rgba(0, 0, 0, 0.9)" }}
     >{skills}</MotionH3>
     <MotionH4
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       //h태그는 프레이머 모션 CSS가 우선인가?
       transition={{ duration: 1, delay: 0.5 }}
-      style={{ color: "rgba(255, 255, 255, 0.9)" }}
+      style={{ color: "rgba(0, 0, 0, 0.9)" }}
     >{experts}</MotionH4>
   </Container>)
 }
@@ -58,7 +58,7 @@ display: flex;
 justify-content: flex-start;
 padding: 5px;
 align-items: center;
-background-color: rgba(0, 0, 0, 0.9);
+background-color: rgba(235, 235, 235, 0.9);
 color: white;
 width: 250px; /* 상위 컨테이너의 50%로 설정 (내용물에 비례) */
   height: 140px;

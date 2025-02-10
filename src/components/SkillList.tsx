@@ -55,10 +55,6 @@ function SkillList(value: any) {
     setModalPosition({ top: relativeTop, left: relativeLeft, skills: text.skills, experts: text.experts })
     setCheckState(true);
     const rect = event.currentTarget.getBoundingClientRect();
-    console.log("Element Coordinates: ", rect);
-    console.log("Element X: ", rect.x, "Element Y: ", rect.y);
-    console.log("adsasdas")
-    console.log(checkState)
   }
 
   const handleMouseLeave = () => {
@@ -66,9 +62,8 @@ function SkillList(value: any) {
   }
 
   return (<Container ref={containerRef}>
-    <h2>Skills</h2>
+    <h2>스킬 소개</h2>
     <Line />
-
     <SkillContainer>
       {checkState && <SkillListTooltip top={modalPosition.top} left={modalPosition.left} skills={modalPosition.skills} experts={modalPosition.experts}></SkillListTooltip>}
 
@@ -91,7 +86,7 @@ export default SkillList;
 const Line = styled.div`
   width: 25vw;
   height: 5px;
-  background-color: rgba(30, 30, 30, 0.9);
+  background-color: rgba(235, 235, 235, 0.9);
   margin-bottom: 15px;
 `
 const SkillIcon = styled(motion.div) <{ image: any }>`
@@ -114,7 +109,7 @@ background-color: rgba(255, 255, 255, 1);
 
 const SkillContainer = styled(motion.div)`
 display: grid;
-grid-gap: 20px;
+grid-gap: 25px;
 align-items: center;
   grid-template-columns: repeat(4, 1fr);
 justify-content: center;
@@ -144,12 +139,10 @@ align-items: center;
 flex-direction: column;
 justify-content: flex-start;
 position: relative;
-width: 1200px;
-max-height: fit-content;
+height: 100%;
 gap: 25px;
-margin-bottom: 150px;
 
-  h2 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
+  h2 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 55px; font-family: inherit;}
   h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: black; font-size: 25px; font-family: inherit;}
 
 `

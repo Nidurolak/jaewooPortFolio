@@ -10,46 +10,46 @@ import 전화 from '../assets/전화.png'
 import git from '../assets/git.png'
 import 티스토리 from '../assets/티스토리.png'
 
-function ContactList (value: any) {
-    
-    return(
-        <Container>
-          <h2>More Info</h2>
-          <Line/>
-          <ContactBox>
-            <ArchiveContainer>
-              <h2>Archive</h2>
-              <ArchiveBox>
-                <Icon image={git}/>
-                <a href="https://github.com/Nidurolak">https://github.com/Nidurolak</a>
-              </ArchiveBox>
-              <ArchiveBox>
-                <Icon image={티스토리}/>
-                <a href="https://karoludin.tistory.com">https://karoludin.tistory.com</a>
-              </ArchiveBox>
-            </ArchiveContainer>
+function ContactList(value: any) {
 
-            <ArchiveContainer>
-              <h2>Contact</h2>
-              <ArchiveBox>
-                <Icon image={이메일}/>
-                <h4>jaewoon08@gmail.com</h4>
-              </ArchiveBox>
-              <ArchiveBox>
-                <Icon image={전화}/>
-                <h4>010-4160-9655</h4>
-              </ArchiveBox>
-            </ArchiveContainer>
+  return (
+    <Container>
+      <h2>More Info</h2>
+      <Line />
+      <ContactBox>
+        <ArchiveContainer>
+          <h2>Archive</h2>
+          <ArchiveBox>
+            <Icon image={git} />
+            <a href="https://github.com/Nidurolak">https://github.com/Nidurolak</a>
+          </ArchiveBox>
+          <ArchiveBox>
+            <Icon image={티스토리} />
+            <a href="https://karoludin.tistory.com">https://karoludin.tistory.com</a>
+          </ArchiveBox>
+        </ArchiveContainer>
 
-          </ContactBox>
-        </Container>
-    )
+        <ArchiveContainer>
+          <h2>Contact</h2>
+          <ArchiveBox>
+            <Icon image={이메일} />
+            <h4>jaewoon08@gmail.com</h4>
+          </ArchiveBox>
+          <ArchiveBox>
+            <Icon image={전화} />
+            <h4>010-4160-9655</h4>
+          </ArchiveBox>
+        </ArchiveContainer>
+
+      </ContactBox>
+    </Container>
+  )
 }
 
 export default ContactList;
 
 const Icon = styled.div<{ image: any }>`
-background-color: rgba(255, 255, 255, 0);
+background-color: rgba(255, 255, 255, 0.8);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -78,10 +78,13 @@ justify-content: flex-start;
 gap: 25px;
 width: 500px;
 max-width: 500px;
-border: 3px solid rgba(30, 30, 30, 0.9);
+border: 3px solid rgba(235, 235, 235, 0.9);
 border-radius: 15px;
 height: 300px;
 max-height: 300px;
+&:hover {
+    cursor: default;
+}
 `
 
 const ContactBox = styled.div`
@@ -102,7 +105,7 @@ flex-direction: column;
 const Line = styled.div`
   width: 25vw;
   height: 5px;
-  background-color: rgba(30, 30, 30, 0.9);
+  background-color: rgba(235, 235, 235, 0.9);
   margin-bottom: 15px;
 `
 
@@ -118,8 +121,25 @@ max-height: 100%;
 gap: 25px;
 margin-bottom: 150px;
 
-  h2 {text-align: center; word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
-  h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: black; font-size: 25px; font-family: inherit;}
-  h4 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 27px; font-family: inherit;}
-  a {color:rgba(30, 30, 30, 0.7);text-decoration: none;font-weight: 500;font-size: 27px;&:hover{color: rgba(30, 30, 30, 1);}}
+  h2 {text-align: center; word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 55px; font-family: inherit;}
+  h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 25px; font-family: inherit;}
+  h4 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 27px; font-family: inherit;}
+
+  a {
+    color: rgba(235, 235, 235, 0.6);
+    font-weight: 500;
+    font-size: 27px;
+
+    &:link {
+      color: rgba(235, 235, 235, 1);
+    }
+
+    &:hover {
+      color: rgba(255, 197, 0, 1);
+    }
+  }
+&:hover {
+    cursor: default;
+}
+
 `
