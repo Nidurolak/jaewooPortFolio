@@ -34,10 +34,10 @@ function Test() {
 
     const mainVariants: Variants = {
         getContent: { borderWidth: "9px", top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: 1 },
-        getSide0: { borderWidth: "3px", top: "10%", left: "1%", width: "150px", height: "100px", opacity: 1 },
-        getSide1: { borderWidth: "3px", top: "25%", left: "1%", width: "150px", height: "100px", opacity: 1 },
-        getSide2: { borderWidth: "3px", top: "40%", left: "1%", width: "150px", height: "100px", opacity: 1 },
-        getSide3: { borderWidth: "3px", top: "55%", left: "1%", width: "150px", height: "100px", opacity: 1 },
+        getSide0: { borderWidth: "3px", top: "20%", left: "1%", width: "150px", height: "100px", opacity: 1 },
+        getSide1: { borderWidth: "3px", top: "35%", left: "1%", width: "150px", height: "100px", opacity: 1 },
+        getSide2: { borderWidth: "3px", top: "50%", left: "1%", width: "150px", height: "100px", opacity: 1 },
+        getSide3: { borderWidth: "3px", top: "65%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getMain0: { borderWidth: "9px", top: "5%", left: "30%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
         getMain1: { borderWidth: "9px", top: "5%", left: "50%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
         getMain2: { borderWidth: "9px", top: "50%", left: "30%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
@@ -109,7 +109,7 @@ function Test() {
                         }
                         {clickedIndex !== null && clickedIndex !== 0 &&
                             <motion.div key={"with-initial02"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><h3>사이드</h3></motion.div>
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><h3>자기소개</h3></motion.div>
                         }
                     </AnimatePresence>
                 </Card>
@@ -136,10 +136,10 @@ function Test() {
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial20"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>프로젝트</motion.h3><motion.h3>Skill</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>프로젝트</motion.h3><motion.h3>Project</motion.h3></motion.div>}
                         {clickedIndex === 2 &&
                             <motion.div key={"with-initial21"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><h2>콘텐츠</h2></motion.div>
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><ProjectList></ProjectList></motion.div>
                         }
                         {clickedIndex !== null && clickedIndex !== 2 &&
                             <motion.div key={"with-initial22"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
@@ -153,7 +153,7 @@ function Test() {
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial30"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>Skill</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>Contact</motion.h3></motion.div>}
                         {clickedIndex === 3 &&
                             <motion.div key={"with-initial31"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><ContactList></ContactList></motion.div>

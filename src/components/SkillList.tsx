@@ -61,8 +61,8 @@ function SkillList(value: any) {
     setCheckState(false)
   }
 
-  return (<Container ref={containerRef}>
-    <h2>스킬 소개</h2>
+  return (<Container ref={containerRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
+    <motion.h2>스킬 소개</motion.h2>
     <Line />
     <SkillContainer>
       {checkState && <SkillListTooltip top={modalPosition.top} left={modalPosition.left} skills={modalPosition.skills} experts={modalPosition.experts}></SkillListTooltip>}

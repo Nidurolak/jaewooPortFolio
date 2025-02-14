@@ -13,7 +13,7 @@ import 티스토리 from '../assets/티스토리.png'
 function ContactList(value: any) {
 
   return (
-    <Container>
+    <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
       <h2>More Info</h2>
       <Line />
       <ContactBox>
