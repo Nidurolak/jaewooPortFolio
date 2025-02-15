@@ -47,13 +47,6 @@ function Test() {
         //겟main 짤 것
     }
 
-    const positions = [
-        //좌표 찌그러지는 위치 조정
-        { top: "5%", left: "30%", clickedTop: "10%", clickedLeft: "10%" },
-        { top: "5%", left: "50%", clickedTop: "25%", clickedLeft: "10%" },
-        { top: "50%", left: "30%", clickedTop: "40%", clickedLeft: "10%" },
-        { top: "50%", left: "50%", clickedTop: "55%", clickedLeft: "10%" },
-    ];
 
 
     const cardAni = (thisNum?: number) => {
