@@ -207,7 +207,7 @@ function Main() {
 
                     {[null, 3].includes(clickedIndex)
                         ? isContentsOn === true
-                            ? /*01.13-여기를 애니메이션 추가하고 내용 들어갈 컴포넌트를 붙여, 그리고 조건 바꿔서 애니메이션 끝날 때 check값 바뀌게 해서 애니메이션 스무스하게*/
+                            ?
                             <motion.div animate={cardContentArray[3]} onAnimationStart={() => console.log("어레이3 시작")} onAnimationComplete={() => setIsAnimating(false)}> <motion.h2>asdasd</motion.h2> </motion.div>
                             :
                             <motion.div animate={cardMenuArray[3]} onAnimationComplete={() => { setIsAnimating(false); clickedIndex !== null && setIsContentsOn(true); lastestContentsNum.current = clickedIndex; }} initial={{ opacity: clickedIndex === null ? 0 : clickedIndex === 3 ? 1 : 0 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>ABOUTME</motion.h3></motion.div>
