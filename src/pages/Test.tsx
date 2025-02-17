@@ -14,6 +14,10 @@ import { Element, scroller } from 'react-scroll';
 import SkillListTooltip from '../components/SkillListTooltip';
 import { CheckWebSize } from '../hooks/CheckWebSize';
 import { ResponsiveWidth } from '../hooks/ResponsiveSize';
+import contact from '../assets/contact.svg'
+import aboutme from '../assets/aboutme.svg'
+import project from '../assets/project.svg'
+import skill from '../assets/skill.svg'
 
 
 function Test() {
@@ -91,14 +95,14 @@ function Test() {
     return (
         <Container onClick={() => Clicked()}>
             <AnimatePresence mode='wait'>
-                <Card key={"card0"} onClick={(e) => { e.stopPropagation(); Clicked(0) }} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={0} selected={0} animate={cardAni(0)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
+                <Card key={"card0"} onClick={(e) => { e.stopPropagation(); Clicked(0) }} variants={mainVariants} style={{ top: "5%", left: "30%" }} index={0} selectednum={0} selectedcurrent={clickedIndex} animate={cardAni(0)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial00"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>자기소개</motion.h3><motion.h3>About Me</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge image={aboutme}></CardBadge><motion.h3>자기소개</motion.h3><motion.h3>About Me</motion.h3></motion.div>}
                         {clickedIndex === 0 &&
                             <motion.div key={"with-initial01"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }} exit={{ opacity: 0 }}></motion.div>
+                                animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }} exit={{ opacity: 0 }}><AboutMeList></AboutMeList></motion.div>
                         }
                         {clickedIndex !== null && clickedIndex !== 0 &&
                             <motion.div key={"with-initial02"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
@@ -108,11 +112,11 @@ function Test() {
                 </Card>
             </AnimatePresence>
             <AnimatePresence mode='wait'>
-                <Card key={"card1"} onClick={(e) => { e.stopPropagation(); Clicked(1) }} variants={mainVariants} style={{ top: "5%", left: "50%" }} index={1} selected={1} animate={cardAni(1)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
+                <Card key={"card1"} onClick={(e) => { e.stopPropagation(); Clicked(1) }} variants={mainVariants} style={{ top: "5%", left: "50%" }} index={1} selectednum={1} selectedcurrent={clickedIndex} animate={cardAni(1)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial10"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>스킬소개</motion.h3><motion.h3>Skill</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge image={skill}></CardBadge><motion.h3>스킬소개</motion.h3><motion.h3>Skill</motion.h3></motion.div>}
                         {clickedIndex === 1 &&
                             <motion.div key={"with-initial11"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><SkillList></SkillList></motion.div>
@@ -125,11 +129,11 @@ function Test() {
                 </Card>
             </AnimatePresence>
             <AnimatePresence mode='wait'>
-                <Card key={"card2"} onClick={(e) => { e.stopPropagation(); Clicked(2) }} variants={mainVariants} style={{ top: "50%", left: "30%" }} index={2} selected={2} animate={cardAni(2)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
+                <Card key={"card2"} onClick={(e) => { e.stopPropagation(); Clicked(2) }} variants={mainVariants} style={{ top: "50%", left: "30%" }} index={2} selectednum={2} selectedcurrent={clickedIndex} animate={cardAni(2)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial20"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>프로젝트</motion.h3><motion.h3>Project</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge image={project}></CardBadge><motion.h3>프로젝트</motion.h3><motion.h3>Project</motion.h3></motion.div>}
                         {clickedIndex === 2 &&
                             <motion.div key={"with-initial21"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><ProjectList></ProjectList></motion.div>
@@ -142,11 +146,11 @@ function Test() {
                 </Card>
             </AnimatePresence>
             <AnimatePresence mode='wait'>
-                <Card key={"card3"} onClick={(e) => { e.stopPropagation(); Clicked(3) }} variants={mainVariants} style={{ top: "50%", left: "50%" }} index={3} selected={3} animate={cardAni(3)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
+                <Card key={"card3"} onClick={(e) => { e.stopPropagation(); Clicked(3) }} variants={mainVariants} style={{ top: "50%", left: "50%" }} index={3} selectednum={3} selectedcurrent={clickedIndex} animate={cardAni(3)} transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}>
                     <AnimatePresence mode='wait'>
                         {clickedIndex === null &&
                             <motion.div key={"with-initial30"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge></CardBadge><motion.h3>연락</motion.h3><motion.h3>Contact</motion.h3></motion.div>}
+                                animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge image={contact}></CardBadge><motion.h3>연락</motion.h3><motion.h3>Contact</motion.h3></motion.div>}
                         {clickedIndex === 3 &&
                             <motion.div key={"with-initial31"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
                                 animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><ContactList></ContactList></motion.div>
@@ -168,9 +172,14 @@ export default Test;
 const CardBadge = styled.div<{ image?: any }>`
     width: 150px;
     height: 150px;
-   background-color: honeydew;
+   background-color: rgba(0,0,0,0);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: ${({ image }) => `url(${image})`};
+  color: rgba(255, 255, 255, 0);
 `
-const Card = styled(motion.div) <{ index: number, selected: number | null }>`
+const Card = styled(motion.div) <{ index: number, selectednum: number | null, selectedcurrent: number | null }>`
 position: absolute;
     width: 300px;
     height: 400px;
@@ -181,12 +190,12 @@ position: absolute;
     justify-content: center;
     background-color: rgba(30,30,30,1);
     border: 9px solid rgba(255, 255, 255, 0.8);
-    /*border: ${({ index, selected }) => (selected === null ? `9px solid rgba(255, 255, 255, 0.8)` : index === selected ? `9px solid rgba(255, 255, 255, 0.8)` : `3px solid rgba(255, 255, 255, 0.8)`)} ;*/
+    /*border: ${({ index, selectednum }) => (selectednum === null ? `9px solid rgba(255, 255, 255, 0.8)` : index === selectednum ? `9px solid rgba(255, 255, 255, 0.8)` : `3px solid rgba(255, 255, 255, 0.8)`)} ;*/
     border-radius: 10px;
 align-items: center;
-z-index: ${({ index, selected }) => (index === selected ? 999 : index)};
+z-index: ${({ index, selectednum }) => (index === selectednum ? 999 : index)};
 &:hover {
-    cursor: pointer;
+    cursor: ${({ selectedcurrent, selectednum }) => (selectedcurrent === null ? "pointer" : selectedcurrent !== selectednum ? "pointer" : "default")};
 }
 
 `

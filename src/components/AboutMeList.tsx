@@ -26,7 +26,7 @@ export default AboutMeList
 const Line = styled.div`
   width: 25vw;
   height: 5px;
-  background-color: rgba(30, 30, 30, 0.9);
+  background-color: rgba(235, 235, 235, 1);
   margin-bottom: 15px;
 `
 const Container = styled(motion.div)`
@@ -34,15 +34,13 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: flex-start;
-padding-top: 25px;
-width: 70vw;
+width: 100%;
 max-width: 1000px;
-max-height: fit-content;
 gap: 25px;
-margin-bottom: 150px;
+cursor: default;
 
-  h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
-  h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(30, 30, 30, 0.9); font-size: 25px; font-family: inherit;}
+  h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 55px; font-family: inherit;}
+  h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 25px; font-family: inherit;}
   h4 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: gray; font-size: 27px; font-family: inherit;}
 
 `
