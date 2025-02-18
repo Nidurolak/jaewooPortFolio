@@ -13,7 +13,7 @@ import ContactList from '../components/ContactList';
 import { Element, scroller } from 'react-scroll';
 import SkillListTooltip from '../components/SkillListTooltip';
 import { CheckWebSize } from '../hooks/CheckWebSize';
-import { ResponsiveWidth } from '../hooks/ResponsiveSize';
+import { ResponsiveContentLeft, ResponsiveHeight, ResponsiveWidth } from '../hooks/ResponsiveSize';
 import contact from '../assets/contact.svg'
 import aboutme from '../assets/aboutme.svg'
 import project from '../assets/project.svg'
@@ -31,21 +31,21 @@ function Test() {
     }
 
 
-    const { width, height } = CheckWebSize(200)
+    const { width, height } = CheckWebSize(100)
     useEffect(() => {
         console.log(`현재 웹 너비: ${width}px, 높이: ${height}px`);
     }, [width, height]);
 
     const mainVariants: Variants = {
-        getContent: { borderWidth: "9px", top: "10%", left: "15%", width: "70vw", height: "80vh", opacity: 1 },
+        getContent: { borderWidth: "9px", top: "10%", left: ResponsiveContentLeft(width), width: "70vw", height: "80vh", opacity: 1 },
         getSide0: { borderWidth: "3px", top: "20%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getSide1: { borderWidth: "3px", top: "35%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getSide2: { borderWidth: "3px", top: "50%", left: "1%", width: "150px", height: "100px", opacity: 1 },
         getSide3: { borderWidth: "3px", top: "65%", left: "1%", width: "150px", height: "100px", opacity: 1 },
-        getMain0: { borderWidth: "9px", top: "5%", left: "30%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
-        getMain1: { borderWidth: "9px", top: "5%", left: "50%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
-        getMain2: { borderWidth: "9px", top: "50%", left: "30%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
-        getMain3: { borderWidth: "9px", top: "50%", left: "50%", width: ResponsiveWidth(width), height: "400px", opacity: 1 },
+        getMain0: { borderWidth: "9px", top: "5%", left: "30%", width: ResponsiveWidth(width), height: ResponsiveHeight(height), opacity: 1 },
+        getMain1: { borderWidth: "9px", top: "5%", left: "50%", width: ResponsiveWidth(width), height: ResponsiveHeight(height), opacity: 1 },
+        getMain2: { borderWidth: "9px", top: "50%", left: "30%", width: ResponsiveWidth(width), height: ResponsiveHeight(height), opacity: 1 },
+        getMain3: { borderWidth: "9px", top: "50%", left: "50%", width: ResponsiveWidth(width), height: ResponsiveHeight(height), opacity: 1 },
         getHoverdIn: { opacity: 0.5, transition: { duration: 3 } },
         getHoverdOut: { opacity: 1, transition: { duration: 3 } }
         //겟main 짤 것
