@@ -11,12 +11,14 @@ function AboutMeList(value: any) {
 
 
   return (
-    <Container>
-      <h2>About Me</h2>
-      <Line />
-      <h3>Frontend에 관심을 두고 있는 주니어 개발자입니다. 항상 경험거리를 찾아 활동해왔으며 문학, 게임 개발, 코딩 등의 분야를 시도해보며 지식을 익히고 다져왔습니다!<br /> 다양한 분야에서 여러 상황을 경험해온 저는 문제를 마주하면 먼저 해보고, 조사하고, 공유하며 해결하는 것을 모토로 삼고 있습니다!</h3>
+    <AnimatePresence mode='wait'>
+      <Container>
+        <h2>About Me</h2>
+        <Line />
+        <h3>Frontend에 관심을 두고 있는 주니어 개발자입니다. 항상 경험거리를 찾아 활동해왔으며 문학, 게임 개발, 코딩 등의 분야를 시도해보며 지식을 익히고 다져왔습니다!<br /> 다양한 분야에서 여러 상황을 경험해온 저는 문제를 마주하면 먼저 해보고, 조사하고, 공유하며 해결하는 것을 모토로 삼고 있습니다!</h3>
 
-    </Container>)
+      </Container>
+    </AnimatePresence>)
 }
 
 export default AboutMeList

@@ -41,4 +41,9 @@ justify-content: center;
   }
   h1 {word-spacing: 1px; word-break:keep-all; color: rgba(235 235, 235, 0.8); font-size: 21px; font-family: inherit;}
 
+  @media (max-width: 1400px) {
+    width: 150px;
+    height: 80px;
+    h1 {word-spacing: 1px; word-break:keep-all; color: rgba(235 235, 235, 0.8); font-size: 17px; font-family: inherit;}
+  }
 `
