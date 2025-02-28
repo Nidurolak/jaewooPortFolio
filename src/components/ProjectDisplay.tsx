@@ -117,12 +117,6 @@ function ProjectDisplay(value: ProjectTemplet) {
 
 export default ProjectDisplay
 
-const Line = styled.div`
-  width: 25vw;
-  height: 5px;
-  background-color: rgba(30, 30, 30, 0.9);
-  margin-bottom: 15px;
-`
 const InfoDisplay = styled.div`
 width: 100%;
 height: 100%;
@@ -181,10 +175,20 @@ display: flex;
 width: 600px;
 height: 550px;
 @media (max-height: 900px) {
-    height: 400px;
+    height: 500px;
 }
 @media (max-height: 800px) {
-    height: 350px;
+    height: 450px;
+}
+@media (max-width: 1400px) {
+    width: 550px;
+}
+@media (max-width: 1200px) {
+    width: 500px;
+}
+@media (max-width: 1000px) {
+    width: 400px;
+height: 450px;
 }
 background-color:  rgba(240, 240, 240, 0);
   h2 {word-spacing: 1px; word-break:keep-all; font-weight: 700; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}

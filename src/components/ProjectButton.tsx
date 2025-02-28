@@ -46,4 +46,8 @@ justify-content: center;
     height: 80px;
     h1 {word-spacing: 1px; word-break:keep-all; color: rgba(235 235, 235, 0.8); font-size: 17px; font-family: inherit;}
   }
+  @media (max-width: 1100px) {
+    width: 150px;
+    height: 50px;
+  }
 `

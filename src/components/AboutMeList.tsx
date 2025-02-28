@@ -12,7 +12,7 @@ function AboutMeList(value: any) {
 
   return (
     <AnimatePresence mode='wait'>
-      <Container >
+      <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
         <ProfilImage image={HeadImage}></ProfilImage>
         <h2>About Me</h2>
         <Line />

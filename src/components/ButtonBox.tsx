@@ -32,26 +32,34 @@ gap: 7px;
 padding-right: 10px;
   @media (max-width: 1000px) {
     width: 100%;
-    height: 100px;
+    height: 100%;
     display: grid;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 800px) {
+    display: grid;
+    justify-content: center;
+    align-items: flex-start;
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    height: 100%;
   }
   @media (max-width: 700px) {
+    display: grid;
+    justify-content: center;
+    align-items: flex-start;
     grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
   }
   @media (max-height: 900px) {
-height: 400px;
-justify-content: center;
-align-items: center;
+height: 100%;
+padding-right: none;
   }
   @media (max-height: 700px) {
-height: 300px;
-justify-content: center;
-align-items: center;
+height: 100%;
+padding-right: none;
   }
 `

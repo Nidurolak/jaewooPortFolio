@@ -102,7 +102,7 @@ function Test() {
                                 animate={{ opacity: 1 }} transition={{ duration: 1.5 }} exit={{ opacity: 0 }}><CardBadge image={aboutme}></CardBadge><motion.h3>자기소개</motion.h3><motion.h3>About Me</motion.h3></motion.div>}
                         {clickedIndex === 0 &&
                             <motion.div key={"with-initial01"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
-                                animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }} exit={{ opacity: 0 }}><AboutMeList></AboutMeList></motion.div>
+                                animate={{ opacity: 1 }} transition={{ delay: 1 }} exit={{ opacity: 0 }}><AboutMeList></AboutMeList></motion.div>
                         }
                         {clickedIndex !== null && clickedIndex !== 0 &&
                             <motion.div key={"with-initial02"} initial={{ opacity: 0, }} onAnimationStart={() => setIsAni(true)} onAnimationComplete={() => setIsAni(false)}
