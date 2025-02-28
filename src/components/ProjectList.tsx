@@ -29,6 +29,9 @@ const Line = styled.div`
   height: 5px;
   background-color: rgba(235, 235, 235, 1);
   margin-bottom: 15px;
+@media (max-height: 900px) {
+  margin-bottom: 5px;
+}
 `
 const ProjectContainer = styled.div`
 display: flex;
@@ -50,9 +53,15 @@ justify-content: center;
 width: 100%;
 height: 100%;
 gap: 25px;
-
   h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 55px; font-family: inherit;}
   h3 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 25px; font-family: inherit;}
   h4 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: gray; font-size: 27px; font-family: inherit;}
+
+@media (max-height: 900px) {
+gap: 10px;
+overflow-y: auto;
+h2 {word-spacing: 1px; word-break:keep-all; padding-left: 10px; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 35px; font-family: inherit;}
+
+}
 
 `

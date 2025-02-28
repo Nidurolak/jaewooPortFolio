@@ -53,7 +53,7 @@ function ProjectDisplay(value: ProjectTemplet) {
                         <h3>2023.3 ~ 2023.4</h3>
                         <h4>소규모 팀 업무 및 일정, 과제 관리 서비스</h4>
                         <h5>사용 기술 : React, Recoil, React-Query & Styled-Component, Axios</h5>
-                        <h6 onClick={() => window.open("https://github.com/HangHae-Navis/navis-fe")}>git 바로가기</h6>
+                        <a href="https://github.com/HangHae-Navis/navis-fe">git 바로가기</a>
                     </InfoDisplay>}
                 </DisPlayIMG>
             </ProjectBox>;
@@ -66,7 +66,7 @@ function ProjectDisplay(value: ProjectTemplet) {
                         <h3>2024.6 ~ 2024.8</h3>
                         <h4>게임 마비노기의 AI 직접 생성 및 편집 기능</h4>
                         <h5>사용 기술 : TypeScript, React, Recoil, Styled-Component, Framer-Motion</h5>
-                        <h6 onClick={() => window.open("https://github.com/Nidurolak/jaewoo-sAI")}>git 바로가기</h6>
+                        <a href="https://github.com/Nidurolak/jaewoo-sAI">git 바로가기</a>
                     </InfoDisplay>}
                 </DisPlayIMG>
 
@@ -79,7 +79,7 @@ function ProjectDisplay(value: ProjectTemplet) {
                         <h3>2023.12 ~ 2024.1</h3>
                         <h4>게임 마비노기의 AI 정보 열람 및 다운로드 사이트</h4>
                         <h5>사용 기술 : TypeScript, React, Recoil, Styled-Component, Framer-Motion</h5>
-                        <h6 onClick={() => window.open("https://github.com/Nidurolak/jaewoo-sAI")}>git 바로가기</h6>
+                        <a href="https://github.com/Nidurolak/jaewoo-sAI">git 바로가기</a>
                     </InfoDisplay>}
                 </DisPlayIMG>
 
@@ -92,7 +92,7 @@ function ProjectDisplay(value: ProjectTemplet) {
                         <h3>2023.8</h3>
                         <h4>아재 개그를 올리고 평가를 주고받는 사이트</h4>
                         <h5>사용 기술 : TypeScript, React, Recoil, React-Query & Styled-Component, Axios</h5>
-                        <h6 onClick={() => window.open("https://github.com/A-JAE-GAG/AJGag-fe")}>git 바로가기</h6>
+                        <a href="https://github.com/A-JAE-GAG/AJGag-fe">git 바로가기</a>
                     </InfoDisplay>}
                 </DisPlayIMG>
             </ProjectBox>; break;
@@ -137,6 +137,13 @@ justify-content: center;
 flex-direction: column;
 padding-left: 40px;
 padding-right: 40px;
+  &:link {
+      color: rgba(235, 235, 235, 1);
+    }
+
+    &:hover {
+      color: rgba(255, 197, 0, 1);
+    }
 `
 
 const DisPlayIMG = styled.div<{ image: any }>`
@@ -164,17 +171,37 @@ padding-top: 15px;
     width: 100%;
     height: 100%;
     background-color: rgba(240, 240, 240, 0);
+@media (max-height: 900px) {
+padding-top: 5px;
+}
 `
 
 const ProjectDisplayBox = styled(motion.div)`
 display: flex;
 width: 600px;
 height: 550px;
+@media (max-height: 900px) {
+    height: 400px;
+}
+@media (max-height: 800px) {
+    height: 350px;
+}
 background-color:  rgba(240, 240, 240, 0);
   h2 {word-spacing: 1px; word-break:keep-all; font-weight: 700; color: rgba(30, 30, 30, 0.9); font-size: 55px; font-family: inherit;}
-  h3 {word-spacing: 1px; word-break:keep-all; font-weight: 400; color: gray; font-size: 25px; font-family: inherit;}
+  h3 {word-spacing: 1px; word-break:keep-all; font-weight: 400; color: rgba(30, 30, 30, 0.9); font-size: 25px; font-family: inherit;}
   h4 {word-spacing: 1px; word-break:keep-all; font-weight: 400; color: black; font-size: 17px; font-family: inherit;}
   h5 {word-spacing: 1px; word-break:keep-all; font-weight: 400; color: gray; font-size: 13px; font-family: inherit;}
-  h6 {word-spacing: 1px; word-break:keep-all; font-weight: 400; color: blue; font-size: 17px; font-family: inherit; cursor: pointer;}
+  a {
+    color: darkgray;
+    font-weight: 500;
+    font-size: 27px;
+
+    &:link {
+      color: rgba(235, 235, 235, 1);
+    }
+
+    &:hover {
+      color: rgba(255, 197, 0, 1);
+    }}
 
 `

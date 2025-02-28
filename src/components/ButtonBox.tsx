@@ -44,4 +44,14 @@ padding-right: 10px;
   @media (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
   }
+  @media (max-height: 900px) {
+height: 400px;
+justify-content: center;
+align-items: center;
+  }
+  @media (max-height: 700px) {
+height: 300px;
+justify-content: center;
+align-items: center;
+  }
 `

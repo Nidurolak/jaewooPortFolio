@@ -85,6 +85,15 @@ max-height: 300px;
 &:hover {
     cursor: default;
 }
+@media (max-width: 1400px) {
+gap: 10px;
+}
+@media (max-height: 900px) {
+gap: 10px;
+height: 250px;
+max-height: 250px;
+}
+
 `
 
 const ContactBox = styled.div`
@@ -97,8 +106,15 @@ width: 100%;
 height: 100%;
 max-height: 600px;
 margin-bottom: 50px;
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
 flex-direction: column;
+gap: 20px;
+}
+@media (max-height: 900px) {
+max-height: 500px;
+}
+@media (max-height: 700px) {
+max-height: 400px;
 }
 `
 
@@ -107,6 +123,9 @@ const Line = styled.div`
   height: 5px;
   background-color: rgba(235, 235, 235, 0.9);
   margin-bottom: 15px;
+@media (max-height: 900px) {
+  margin-bottom: 0px;
+}
 `
 
 const Container = styled(motion.div)`
@@ -124,7 +143,14 @@ margin-bottom: 150px;
   h2 {text-align: center; word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 55px; font-family: inherit;}
   h3 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 25px; font-family: inherit;}
   h4 {word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 27px; font-family: inherit;}
-
+  @media (max-width: 1400px) {
+    h2 {text-align: center; word-spacing: 1px; word-break:keep-all; font-weight: 450; color: rgba(235, 235, 235, 1); font-size: 35px; font-family: inherit;}
+    justify-content:center;
+    gap: 10px;
+  }
+@media (max-height: 900px) {
+gap: 10px;
+}
   a {
     color: rgba(235, 235, 235, 0.6);
     font-weight: 500;
