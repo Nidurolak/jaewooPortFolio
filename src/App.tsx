@@ -3,9 +3,11 @@ import logo from './logo.svg';
 import { isMobile } from 'react-device-detect';
 import './App.css';
 import Router from './shared/Router';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
-  return (isMobile ?<></> : <Router/>);
+  <Analytics />
+  return (isMobile ? <></> : <Router />);
 }
 
 export default App;
